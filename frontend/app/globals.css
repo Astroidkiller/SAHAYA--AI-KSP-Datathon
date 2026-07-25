@@ -3,32 +3,32 @@
 /* ── SAHAYA AI — Tactical Law Enforcement Portal Palette (Karnataka State Police) ── */
 
 @theme inline {
-  /* Tactical Slate & Deep Midnight Navy Palette */
-  --color-bg-primary: #0A0D12;     /* Midnight Tactical Base */
-  --color-bg-secondary: #111722;   /* Deep Police Command Navy */
-  --color-bg-tertiary: #192231;    /* Slate Panel Container */
-  --color-bg-elevated: #243042;    /* Interactive Surface */
-  --color-bg-surface: #1E2838;     /* Surface Panel */
+  /* Exact User Swatch Palette */
+  --color-bg-primary: #121618;     /* 1. Deepest Midnight Charcoal */
+  --color-bg-secondary: #10232A;   /* 2. Deep Navy Slate */
+  --color-bg-tertiary: #1C2B33;    /* Panel Surface */
+  --color-bg-elevated: #3D4D55;    /* 3. Slate Blue-Grey */
+  --color-bg-surface: #10232A;     /* Deep Navy Slate Surface */
 
   /* Operational Highlights & Status Indicators */
-  --color-accent-amber: #D97706;   /* Tactical Amber Warning */
-  --color-accent-copper: #C28254;  /* KSP Official Accent */
+  --color-accent-amber: #B58863;   /* 5. Warm Caramel / Ochre Copper */
+  --color-accent-copper: #B58863;  /* 5. Warm Caramel / Ochre Copper */
   --color-accent-cyan: #38BDF8;    /* Radar Blue */
   --color-accent-red: #E11D48;     /* Critical Alert Red */
   --color-accent-green: #10B981;   /* System Normal Green */
   --color-accent-purple: #8B5CF6;  /* Syndicate Purple */
 
   /* Crisp Professional Typography */
-  --color-text-primary: #F1F5F9;   /* High Contrast White */
-  --color-text-secondary: #94A3B8; /* Slate Subtext */
-  --color-text-tertiary: #64748B;  /* Muted Muted Grey */
-  --color-text-muted: #64748B;     /* Legacy Muted Support */
-  --color-text-accent: #C28254;   /* KSP Copper Text */
+  --color-text-primary: #D3C3B9;   /* 4. Warm Sand Beige */
+  --color-text-secondary: #A79E9C; /* 3. Cool Stone Grey */
+  --color-text-tertiary: #A79E9C;  /* Cool Stone Grey Subtext */
+  --color-text-muted: #A79E9C;     /* Cool Stone Grey Muted */
+  --color-text-accent: #B58863;   /* 5. Warm Caramel / Ochre Copper */
 
   /* Crisp Tactical Borders */
-  --color-border-default: rgba(148, 163, 184, 0.14); /* Crisp Slate Border */
-  --color-border-subtle: rgba(148, 163, 184, 0.08);
-  --color-border-accent: rgba(194, 130, 84, 0.35);   /* KSP Gold/Copper Border */
+  --color-border-default: rgba(167, 158, 156, 0.2); /* Cool Stone Grey Border */
+  --color-border-subtle: rgba(167, 158, 156, 0.1);
+  --color-border-accent: rgba(181, 136, 99, 0.4);   /* Warm Copper Border */
 
   /* Fonts */
   --font-sans: var(--font-geist-sans);

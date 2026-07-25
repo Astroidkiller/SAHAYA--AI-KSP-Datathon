@@ -118,7 +118,7 @@ export function Sidebar() {
             const isActive = cleanPath === cleanTarget;
             const Icon = item.icon;
             return (
-              <Link
+              <a
                 key={item.href}
                 href={item.href}
                 id={item.id}
@@ -134,7 +134,7 @@ export function Sidebar() {
                   <span className="ml-auto w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 )}
                 {isActive && <ChevronRight className="w-3.5 h-3.5 ml-auto text-amber-400" />}
-              </Link>
+              </a>
             );
           })}
         </nav>

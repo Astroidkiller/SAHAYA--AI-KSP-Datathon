@@ -218,54 +218,64 @@ export function ChatWindow() {
       .replace(/\n+/g, ". ")
       .substring(0, 500);
 
-    const utterance = new SpeechSynthesisUtterance(cleanText);
+    const doSpeak = () => {
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      const voices = window.speechSynthesis.getVoices();
+      let femaleVoice: SpeechSynthesisVoice | null = null;
 
-    // Fetch browser voices & select high-quality female voice
-    const voices = window.speechSynthesis.getVoices();
-    let femaleVoice: SpeechSynthesisVoice | null = null;
+      if (language === "kn") {
+        femaleVoice = voices.find(v => v.lang.includes("kn") || v.name.toLowerCase().includes("kannada")) || null;
+      }
 
-    if (language === "kn") {
-      femaleVoice = voices.find(v => v.lang.includes("kn") || v.name.toLowerCase().includes("kannada")) || null;
-    }
+      if (!femaleVoice && voices.length > 0) {
+        const priorityNames = [
+          "zira", "heera", "neerja", "aria", "jenny", "samantha",
+          "karen", "victoria", "google us english", "google uk english female",
+          "female", "woman", "hazel", "susan", "catherine"
+        ];
+        
+        for (const name of priorityNames) {
+          const found = voices.find(v => v.name.toLowerCase().includes(name));
+          if (found) {
+            femaleVoice = found;
+            break;
+          }
+        }
 
-    if (!femaleVoice && voices.length > 0) {
-      const priorityNames = [
-        "zira", "heera", "neerja", "aria", "jenny", "samantha",
-        "karen", "victoria", "google us english", "google uk english female",
-        "female", "woman"
-      ];
-      
-      for (const name of priorityNames) {
-        const found = voices.find(v => v.name.toLowerCase().includes(name));
-        if (found) {
-          femaleVoice = found;
-          break;
+        if (!femaleVoice) {
+          femaleVoice = voices.find(v => 
+            !["david", "mark", "george", "ravi", "male", "guy", "james", "richard", "alex", "stefan", "pavel", "sean"].some(m => v.name.toLowerCase().includes(m))
+          ) || voices[0] || null;
         }
       }
 
-      // Fallback: exclude explicit male voices
-      if (!femaleVoice) {
-        femaleVoice = voices.find(v => 
-          !["david", "mark", "george", "ravi", "male", "guy", "james", "richard", "alex", "stefan"].some(m => v.name.toLowerCase().includes(m))
-        ) || null;
+      if (femaleVoice) {
+        utterance.voice = femaleVoice;
+        utterance.lang = femaleVoice.lang;
+      } else {
+        utterance.lang = language === "kn" ? "kn-IN" : "en-US";
       }
-    }
 
-    if (femaleVoice) {
-      utterance.voice = femaleVoice;
-      utterance.lang = femaleVoice.lang;
+      utterance.rate = 1.1;
+      utterance.pitch = 1.35;
+
+      utterance.onend = () => setSpeakingMessageId(null);
+      utterance.onerror = () => setSpeakingMessageId(null);
+
+      setSpeakingMessageId(messageId);
+      window.speechSynthesis.speak(utterance);
+    };
+
+    if (window.speechSynthesis.getVoices().length === 0) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.onvoiceschanged = null;
+        doSpeak();
+      };
+      window.speechSynthesis.getVoices();
+      setTimeout(doSpeak, 150);
     } else {
-      utterance.lang = language === "kn" ? "kn-IN" : "en-US";
+      doSpeak();
     }
-
-    utterance.rate = 1.1;
-    utterance.pitch = 1.25;
-
-    utterance.onend = () => setSpeakingMessageId(null);
-    utterance.onerror = () => setSpeakingMessageId(null);
-
-    setSpeakingMessageId(messageId);
-    window.speechSynthesis.speak(utterance);
   };
 
   const handleExportChat = () => {
