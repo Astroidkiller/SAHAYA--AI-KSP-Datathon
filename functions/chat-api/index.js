@@ -21,6 +21,11 @@ const { handleNetworkQuery } = require("./network-handler");
 const { handleProfileQuery } = require("./profile-handler");
 const { handleSummaryQuery } = require("./summary-handler");
 const {
+  isKannadaText,
+  translateKannadaToEnglish,
+  attachKannadaResponse,
+} = require("./kannada-translator");
+const {
   getSession,
   addTurn,
   resolveReferences,
@@ -60,22 +65,30 @@ app.post("/api/chat", async (req, res) => {
       });
     }
 
-    // Step 0: Get or create session
-    const session = await getSession(req, session_id);
+    // Step 0: Handle Kannada input & translation
+    const isKannadaInput = isKannadaText(message) || language === "kn";
+    const englishMessage = isKannadaInput ? translateKannadaToEnglish(message) : message;
 
-    // Step 1: Resolve pronouns/references using session context
-    const { resolvedMessage, resolvedEntities } = resolveReferences(message, session);
-    const wasResolved = resolvedMessage !== message;
-
-    if (wasResolved) {
-      console.log(`[SAHAYA] Resolved: "${message}" → "${resolvedMessage}"`);
+    if (isKannadaInput) {
+      console.log(`[SAHAYA] Kannada Input Detected: "${message}" → English: "${englishMessage}"`);
     }
 
-    // Step 2: Classify intent (on resolved message)
+    // Step 1: Get or create session
+    const session = await getSession(req, session_id);
+
+    // Step 2: Resolve pronouns/references using session context
+    const { resolvedMessage, resolvedEntities } = resolveReferences(englishMessage, session);
+    const wasResolved = resolvedMessage !== englishMessage;
+
+    if (wasResolved) {
+      console.log(`[SAHAYA] Resolved: "${englishMessage}" → "${resolvedMessage}"`);
+    }
+
+    // Step 3: Classify intent (on resolved message)
     const intent = classifyIntent(resolvedMessage);
     console.log(`[SAHAYA] Intent: ${intent.type} | Confidence: ${intent.confidence} | Query: "${resolvedMessage}"`);
 
-    // Step 3: Route to handler
+    // Step 4: Route to handler
     let response;
     switch (intent.type) {
       case "fact":
@@ -96,7 +109,12 @@ app.post("/api/chat", async (req, res) => {
         break;
     }
 
-    // Step 4: Extract entities from response and update session
+    // Step 5: Attach Kannada response if input was in Kannada
+    if (isKannadaInput && response && response.answer) {
+      response.answer = attachKannadaResponse(response.answer, true);
+    }
+
+    // Step 6: Extract entities from response and update session
     const extracted = {
       ...resolvedEntities,
       ...extractEntitiesFromResponse(response, resolvedMessage),
@@ -104,7 +122,7 @@ app.post("/api/chat", async (req, res) => {
     };
     await addTurn(req, session, message, response, extracted);
 
-    // Step 5: Attach session ID and context resolution note
+    // Step 7: Attach session ID and context resolution note
     response.session_id = session.id;
     if (wasResolved) {
       response.context_note = `(Resolved from context: "${message}" → "${resolvedMessage}")`;

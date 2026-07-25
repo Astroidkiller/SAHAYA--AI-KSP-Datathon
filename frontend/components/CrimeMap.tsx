@@ -197,10 +197,13 @@ export function CrimeMap() {
   }, []);
 
   useEffect(() => {
-    if (typeof window === "undefined" || mapInstanceRef.current) return;
+    if (typeof window === "undefined") return;
+    let isCancelled = false;
 
     // Dynamically import Leaflet to avoid SSR issues
     import("leaflet").then((L) => {
+      if (isCancelled || !mapRef.current) return;
+
       // Fix default marker icons
       delete (L.Icon.Default.prototype as { _getIconUrl?: unknown })._getIconUrl;
       L.Icon.Default.mergeOptions({
@@ -209,7 +212,14 @@ export function CrimeMap() {
         shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
       });
 
-      if (!mapRef.current) return;
+      // Guard against already initialized container
+      if ((mapRef.current as any)._leaflet_id) {
+        if (mapInstanceRef.current) {
+          mapInstanceRef.current.remove();
+          mapInstanceRef.current = null;
+        }
+        (mapRef.current as any)._leaflet_id = null;
+      }
 
       // Create the map centered on Karnataka
       const map = L.map(mapRef.current, {
@@ -233,15 +243,19 @@ export function CrimeMap() {
     });
 
     return () => {
+      isCancelled = true;
       if (mapInstanceRef.current) {
         mapInstanceRef.current.remove();
         mapInstanceRef.current = null;
+      }
+      if (mapRef.current) {
+        (mapRef.current as any)._leaflet_id = null;
       }
     };
   }, [loadAndRenderData]);
 
   return (
-    <div className="relative w-full rounded-xl overflow-hidden border border-[var(--color-border-default)]" style={{ height: 480 }}>
+    <div className="relative w-full rounded-2xl overflow-hidden border border-[var(--color-border-default)] shadow-lg" style={{ height: 480 }}>
       {/* Leaflet CSS */}
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
       

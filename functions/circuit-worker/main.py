@@ -15,8 +15,13 @@ and is triggered by a Catalyst Circuit on schedule.
 import json
 import os
 import sys
-from datetime import datetime
+import io
+from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, HTTPServer
+
+# Ensure UTF-8 output encoding for Windows console compatibility
+if hasattr(sys.stdout, "buffer"):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
 from graph_analysis import build_suspect_graph, detect_crime_rings, build_graph_json
 from hotspot_aggregator import (

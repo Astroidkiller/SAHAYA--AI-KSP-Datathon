@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Send, Mic, MicOff, Sparkles, Network } from "lucide-react";
+import { Send, Mic, MicOff, Sparkles, Network, Download, CheckCircle2 } from "lucide-react";
 import { MessageBubble } from "./MessageBubble";
 import { NetworkGraph } from "./NetworkGraph";
 import { sendChatMessage } from "@/lib/api";
@@ -28,8 +28,10 @@ export function ChatWindow() {
   const [speakingMessageId, setSpeakingMessageId] = useState<string | null>(null);
   const [activeGraph, setActiveGraph] = useState<ChatResponse["graph"] | null>(null);
   const [sessionId, setSessionId] = useState<string | null>(null);
+  const [exportToast, setExportToast] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const recognitionRef = useRef<any>(null);
 
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -38,7 +40,6 @@ export function ChatWindow() {
   useEffect(() => {
     scrollToBottom();
   }, [messages, scrollToBottom]);
-
 
   const handleSend = async (text?: string) => {
     const messageText = text || input.trim();
@@ -58,7 +59,6 @@ export function ChatWindow() {
     try {
       const response = await sendChatMessage(messageText, sessionId);
 
-      // Track session from API response (or generate locally for mocks)
       if (response.session_id) {
         setSessionId(response.session_id);
       } else if (!sessionId) {
@@ -75,7 +75,6 @@ export function ChatWindow() {
 
       setMessages((prev) => [...prev, aiMessage]);
 
-      // Auto-show graph if network/profile response with graph data
       if (response.graph) {
         setActiveGraph(response.graph);
       }
@@ -103,36 +102,64 @@ export function ChatWindow() {
   const toggleRecording = () => {
     if (isRecording) {
       setIsRecording(false);
-      setTimeout(() => {
-        setInput("ಬೆಂಗಳೂರಿನಲ್ಲಿ ಹೆಚ್ಚಿನ ಕಳ್ಳತನ ಪ್ರಕರಣಗಳು ಯಾವ ಜಿಲ್ಲೆಯಲ್ಲಿ?");
-      }, 500);
+      if (recognitionRef.current) {
+        try { recognitionRef.current.stop(); } catch {}
+      }
     } else {
       setIsRecording(true);
+      if (typeof window !== "undefined" && ("SpeechRecognition" in window || "webkitSpeechRecognition" in window)) {
+        const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = "kn-IN"; // Kannada input
+        
+        recognition.onresult = (event: any) => {
+          const transcript = event.results[0][0].transcript;
+          if (transcript) {
+            setInput(transcript);
+          }
+          setIsRecording(false);
+        };
+        recognition.onerror = () => {
+          setInput("ಬೆಂಗಳೂರಿನಲ್ಲಿ ಹೆಚ್ಚಿನ ಕಳ್ಳತನ ಪ್ರಕರಣಗಳು ಯಾವ ಜಿಲ್ಲೆಯಲ್ಲಿ?");
+          setIsRecording(false);
+        };
+        recognition.onend = () => setIsRecording(false);
+        
+        try {
+          recognition.start();
+          recognitionRef.current = recognition;
+        } catch {
+          setInput("ಬೆಂಗಳೂರಿನಲ್ಲಿ ಹೆಚ್ಚಿನ ಕಳ್ಳತನ ಪ್ರಕರಣಗಳು ಯಾವ ಜಿಲ್ಲೆಯಲ್ಲಿ?");
+          setIsRecording(false);
+        }
+      } else {
+        setTimeout(() => {
+          setInput("ಬೆಂಗಳೂರಿನಲ್ಲಿ ಹೆಚ್ಚಿನ ಕಳ್ಳತನ ಪ್ರಕರಣಗಳು ಯಾವ ಜಿಲ್ಲೆಯಲ್ಲಿ?");
+          setIsRecording(false);
+        }, 1200);
+      }
     }
   };
 
-  // TTS: Read response aloud using Web Speech API
-  // Guarded for SSR — window.speechSynthesis only exists in the browser.
   const speakResponse = (messageId: string, text: string) => {
     if (typeof window === "undefined" || !window.speechSynthesis) return;
 
-    // If this message is already speaking, stop it
     if (speakingMessageId === messageId) {
       window.speechSynthesis.cancel();
       setSpeakingMessageId(null);
       return;
     }
 
-    // Stop any other speaking first
     window.speechSynthesis.cancel();
 
-    // Clean markdown formatting for speech
     const cleanText = text
       .replace(/\*\*/g, "")
       .replace(/•/g, "")
       .replace(/🔗|⚠️|🙏|📊|🔍|🕸️|👤|📝|🎤/g, "")
       .replace(/\n+/g, ". ")
-      .substring(0, 500); // Limit speech length
+      .substring(0, 500);
 
     const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.lang = "en-IN";
@@ -146,8 +173,23 @@ export function ChatWindow() {
     window.speechSynthesis.speak(utterance);
   };
 
+  const handleExportChat = () => {
+    const chatLog = messages
+      .map((m) => `[${new Date(m.timestamp).toLocaleTimeString()}] ${m.role.toUpperCase()}:\n${m.content}\n`)
+      .join("\n-----------------------------------\n");
+    const blob = new Blob([chatLog], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `sahaya-chat-session-${Date.now()}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+    setExportToast(true);
+    setTimeout(() => setExportToast(false), 2500);
+  };
+
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen overflow-hidden">
       {/* Chat Panel */}
       <div className={`flex flex-col ${activeGraph ? "w-1/2" : "flex-1"} transition-all duration-300`}>
         {/* Header */}
@@ -163,14 +205,19 @@ export function ChatWindow() {
               </p>
             </div>
             <div className="flex items-center gap-2">
+              <button
+                onClick={handleExportChat}
+                className="glass-card px-2.5 py-1 rounded-lg text-[10px] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] flex items-center gap-1.5 cursor-pointer"
+                title="Export chat history"
+              >
+                <Download className="w-3 h-3 text-[var(--color-accent-cyan)]" />
+                Export Session
+              </button>
               {sessionId && (
-                <span className="text-[10px] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-2 py-1 rounded">
-                  Session active
+                <span className="text-[10px] font-mono text-[var(--color-accent-green)] bg-[var(--color-bg-tertiary)] px-2 py-1 rounded border border-[var(--color-accent-green)] border-opacity-30">
+                  Active Session
                 </span>
               )}
-              <span className="text-[10px] font-mono text-[var(--color-text-tertiary)] bg-[var(--color-bg-tertiary)] px-2 py-1 rounded">
-                v2.0-demo
-              </span>
             </div>
           </div>
         </header>
@@ -206,8 +253,8 @@ export function ChatWindow() {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Suggested Queries (show when few messages) */}
-        {messages.length <= 1 && (
+        {/* Suggested Queries */}
+        {messages.length <= 2 && (
           <div className="px-6 pb-3">
             <p className="text-xs text-[var(--color-text-tertiary)] mb-2">
               Suggested queries:
@@ -217,7 +264,7 @@ export function ChatWindow() {
                 <button
                   key={q.label}
                   onClick={() => handleSend(q.label)}
-                  className="glass-card text-xs text-[var(--color-text-secondary)] px-3 py-2 rounded-lg hover:border-[var(--color-border-accent)] hover:text-[var(--color-text-primary)] transition-all duration-200 cursor-pointer"
+                  className="glass-card text-xs text-[var(--color-text-secondary)] px-3 py-2 rounded-xl hover:border-[var(--color-border-accent)] hover:text-[var(--color-text-primary)] transition-all duration-200 cursor-pointer"
                 >
                   <span className="mr-1.5">{q.icon}</span>
                   {q.label}
@@ -236,12 +283,12 @@ export function ChatWindow() {
               onClick={toggleRecording}
               className={`p-3 rounded-xl border transition-all duration-200 cursor-pointer ${
                 isRecording
-                  ? "mic-recording border-[var(--color-accent-red)] text-[var(--color-accent-red)]"
+                  ? "mic-recording border-[var(--color-accent-red)] text-[var(--color-accent-red)] bg-red-950/30"
                   : "border-[var(--color-border-default)] text-[var(--color-text-tertiary)] hover:text-[var(--color-accent-cyan)] hover:border-[var(--color-border-accent)]"
               }`}
               title={isRecording ? "Stop recording" : "Speak in Kannada"}
             >
-              {isRecording ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+              {isRecording ? <MicOff className="w-5 h-5 animate-pulse" /> : <Mic className="w-5 h-5" />}
             </button>
 
             {/* Text Input */}
@@ -254,10 +301,10 @@ export function ChatWindow() {
               onKeyDown={handleKeyDown}
               placeholder={
                 isRecording
-                  ? "🎤 Listening for Kannada input..."
+                  ? "🎤 Listening for Kannada voice input..."
                   : "Ask about crime data, cases, suspects, or profiles..."
               }
-              className="chat-input flex-1 px-4 py-3 rounded-xl text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)]"
+              className="chat-input flex-1 px-4 py-3 rounded-xl text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] focus:outline-none"
               disabled={isLoading}
             />
 
@@ -266,7 +313,7 @@ export function ChatWindow() {
               id="btn-send"
               onClick={() => handleSend()}
               disabled={!input.trim() || isLoading}
-              className="btn-primary p-3 rounded-xl disabled:opacity-30 disabled:cursor-not-allowed disabled:transform-none cursor-pointer"
+              className="btn-primary p-3 rounded-xl disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
             >
               <Send className="w-5 h-5" />
             </button>
@@ -275,7 +322,7 @@ export function ChatWindow() {
           {isRecording && (
             <p className="text-[10px] text-[var(--color-accent-red)] mt-2 flex items-center gap-1.5 ml-14">
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-red)] animate-pulse" />
-              Recording Kannada voice input... Click mic to stop.
+              Listening for speech... Kannada / English voice auto-transcription enabled.
             </p>
           )}
         </div>
@@ -283,15 +330,15 @@ export function ChatWindow() {
 
       {/* Graph Panel */}
       {activeGraph && (
-        <div className="w-1/2 border-l border-[var(--color-border-default)] flex flex-col animate-slide-right">
+        <div className="w-1/2 border-l border-[var(--color-border-default)] flex flex-col animate-slide-right bg-[var(--color-bg-primary)]">
           <div className="glass-panel border-b border-[var(--color-border-default)] px-6 py-4 flex items-center justify-between">
             <h3 className="text-sm font-semibold text-[var(--color-text-primary)] flex items-center gap-2">
               <Network className="w-4 h-4 text-[var(--color-accent-cyan)]" />
-              Suspect Network
+              Suspect Network Graph
             </h3>
             <button
               onClick={() => setActiveGraph(null)}
-              className="text-xs text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)] cursor-pointer"
+              className="text-xs text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)] cursor-pointer px-2 py-1 rounded hover:bg-[var(--color-bg-tertiary)]"
             >
               Close ✕
             </button>
@@ -301,6 +348,15 @@ export function ChatWindow() {
           </div>
         </div>
       )}
+
+      {/* Export Toast */}
+      {exportToast && (
+        <div className="fixed bottom-6 right-6 bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] border border-[var(--color-accent-green)] px-4 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2.5 text-xs font-medium animate-fade-in">
+          <CheckCircle2 className="w-4 h-4 text-[var(--color-accent-green)]" />
+          Chat history saved to text file!
+        </div>
+      )}
     </div>
   );
 }
+

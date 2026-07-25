@@ -9,10 +9,10 @@ const CrimeMapInner = dynamic(
     ssr: false,
     loading: () => (
       <div
-        className="w-full rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border-default)] flex items-center justify-center"
+        className="w-full rounded-2xl bg-[var(--color-bg-secondary)] border border-[var(--color-border-default)] flex items-center justify-center"
         style={{ height: 480 }}
       >
-        <div className="text-[var(--color-text-muted)] animate-pulse text-sm">
+        <div className="text-[var(--color-text-tertiary)] animate-pulse text-sm font-medium">
           Loading crime map...
         </div>
       </div>

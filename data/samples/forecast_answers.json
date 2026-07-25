@@ -54,7 +54,7 @@
         "upper_bound": 7.3
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572403Z"
+    "computed_at": "2026-07-25T10:13:30.859340Z"
   },
   {
     "district": "Shivamogga",
@@ -111,7 +111,7 @@
         "upper_bound": 5.9
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572439Z"
+    "computed_at": "2026-07-25T10:13:30.859411Z"
   },
   {
     "district": "Mangaluru",
@@ -170,7 +170,7 @@
         "upper_bound": 3.0
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572325Z"
+    "computed_at": "2026-07-25T10:13:30.859235Z"
   },
   {
     "district": "Bengaluru Urban",
@@ -227,7 +227,7 @@
         "upper_bound": 4.0
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572092Z"
+    "computed_at": "2026-07-25T10:13:30.858887Z"
   },
   {
     "district": "Kalaburagi",
@@ -284,7 +284,7 @@
         "upper_bound": 2.0
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572268Z"
+    "computed_at": "2026-07-25T10:13:30.859160Z"
   },
   {
     "district": "Mysuru",
@@ -343,7 +343,7 @@
         "upper_bound": 3.9
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572364Z"
+    "computed_at": "2026-07-25T10:13:30.859286Z"
   },
   {
     "district": "Bengaluru Urban",
@@ -406,7 +406,7 @@
         "upper_bound": 5.7
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572136Z"
+    "computed_at": "2026-07-25T10:13:30.858945Z"
   },
   {
     "district": "Belagavi",
@@ -463,7 +463,7 @@
         "upper_bound": 3.1
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.571984Z"
+    "computed_at": "2026-07-25T10:13:30.858702Z"
   },
   {
     "district": "Bengaluru Urban",
@@ -522,7 +522,7 @@
         "upper_bound": 5.5
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572062Z"
+    "computed_at": "2026-07-25T10:13:30.858848Z"
   },
   {
     "district": "Hubli-Dharwad",
@@ -579,7 +579,7 @@
         "upper_bound": 4.9
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572194Z"
+    "computed_at": "2026-07-25T10:13:30.859057Z"
   },
   {
     "district": "Belagavi",
@@ -618,7 +618,7 @@
         "upper_bound": 1.0
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.571905Z"
+    "computed_at": "2026-07-25T10:13:30.858593Z"
   },
   {
     "district": "Bengaluru Rural",
@@ -657,7 +657,7 @@
         "upper_bound": 1.0
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572012Z"
+    "computed_at": "2026-07-25T10:13:30.858747Z"
   },
   {
     "district": "Bengaluru Rural",
@@ -694,7 +694,7 @@
         "upper_bound": 1.0
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572031Z"
+    "computed_at": "2026-07-25T10:13:30.858785Z"
   },
   {
     "district": "Bengaluru Urban",
@@ -731,7 +731,7 @@
         "upper_bound": 1.0
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572107Z"
+    "computed_at": "2026-07-25T10:13:30.858908Z"
   },
   {
     "district": "Davangere",
@@ -770,7 +770,7 @@
         "upper_bound": 1.0
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572153Z"
+    "computed_at": "2026-07-25T10:13:30.858978Z"
   },
   {
     "district": "Davangere",
@@ -809,7 +809,7 @@
         "upper_bound": 1.0
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572170Z"
+    "computed_at": "2026-07-25T10:13:30.859011Z"
   },
   {
     "district": "Hubli-Dharwad",
@@ -846,7 +846,7 @@
         "upper_bound": 1.0
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572211Z"
+    "computed_at": "2026-07-25T10:13:30.859080Z"
   },
   {
     "district": "Kalaburagi",
@@ -883,7 +883,7 @@
         "upper_bound": 1.0
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572227Z"
+    "computed_at": "2026-07-25T10:13:30.859099Z"
   },
   {
     "district": "Kalaburagi",
@@ -922,7 +922,7 @@
         "upper_bound": 1.0
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572243Z"
+    "computed_at": "2026-07-25T10:13:30.859124Z"
   },
   {
     "district": "Mangaluru",
@@ -959,7 +959,7 @@
         "upper_bound": 1.0
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572282Z"
+    "computed_at": "2026-07-25T10:13:30.859181Z"
   },
   {
     "district": "Mangaluru",
@@ -996,7 +996,7 @@
         "upper_bound": 1.0
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572297Z"
+    "computed_at": "2026-07-25T10:13:30.859199Z"
   },
   {
     "district": "Mangaluru",
@@ -1033,7 +1033,7 @@
         "upper_bound": 1.0
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572339Z"
+    "computed_at": "2026-07-25T10:13:30.859252Z"
   },
   {
     "district": "Mysuru",
@@ -1070,7 +1070,7 @@
         "upper_bound": 1.0
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572378Z"
+    "computed_at": "2026-07-25T10:13:30.859305Z"
   },
   {
     "district": "Shivamogga",
@@ -1107,7 +1107,7 @@
         "upper_bound": 1.0
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572416Z"
+    "computed_at": "2026-07-25T10:13:30.859362Z"
   },
   {
     "district": "Tumakuru",
@@ -1144,6 +1144,6 @@
         "upper_bound": 1.0
       }
     ],
-    "computed_at": "2026-07-23T07:25:27.572452Z"
+    "computed_at": "2026-07-25T10:13:30.859428Z"
   }
 ]
