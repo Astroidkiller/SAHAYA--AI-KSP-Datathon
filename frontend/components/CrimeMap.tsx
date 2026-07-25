@@ -59,11 +59,12 @@ export function CrimeMap() {
 
   const loadData = useCallback(async () => {
     try {
-      const data: FIRRecord[] = await fetch("/data/fir_records.json").then((r) =>
-        r.json()
-      );
+      const res = await fetch("/data/fir_records.json");
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data: FIRRecord[] = await res.json();
       setFirData(data);
-    } catch {
+    } catch (err) {
+      console.warn("[CrimeMap] Failed to load FIR records:", err);
       setFirData([]);
     }
   }, []);
@@ -212,7 +213,7 @@ export function CrimeMap() {
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
           <h3 className="text-xs font-extrabold text-slate-100 uppercase tracking-wider font-mono">
-            🗺️ {t.mapTitle.replace("(Google Maps)", "")}
+            🗺️ {t.mapTitle.replace(/\s*\([^)]*\)/g, "")}
           </h3>
         </div>
         <div className="flex items-center gap-3 font-mono">

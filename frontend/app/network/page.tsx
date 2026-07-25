@@ -11,7 +11,11 @@ export default function NetworkPage() {
   const { data: graphData, loading } = usePublicData<GraphData>("graph_data.json", { nodes: [], links: [] });
 
   const highRiskCount = graphData.nodes.filter((n) => n.risk === "High").length;
-  const clusterCount = new Set(graphData.nodes.map((n) => n.group)).size;
+  const groups: Record<number, number> = {};
+  graphData.nodes.forEach((n) => {
+    if (n.group > 0) groups[n.group] = (groups[n.group] || 0) + 1;
+  });
+  const clusterCount = Object.values(groups).filter((cnt) => cnt >= 2).length;
 
   return (
     <div className="min-h-screen p-6 md:p-8 flex flex-col space-y-6">

@@ -22,12 +22,16 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     const saved = localStorage.getItem("sahaya_lang") as Language;
     if (saved && (saved === "en" || saved === "kn")) {
       setLanguageState(saved);
+      document.documentElement.lang = saved;
     }
   }, []);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem("sahaya_lang", lang);
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = lang;
+    }
   };
 
   const value = {

@@ -34,6 +34,20 @@ export function AnomalyAlerts() {
     );
   }
 
+  if (anomalies.length === 0) {
+    return (
+      <div className="bg-[#111722] border border-slate-800 rounded-xl p-4">
+        <h3 className="text-sm font-bold text-slate-100 uppercase tracking-wider flex items-center gap-2 mb-3">
+          <span>⚠️</span> {t.anomalyTitle}
+        </h3>
+        <div className="flex items-center gap-2.5 p-3 rounded-lg bg-emerald-950/30 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
+          <span>✓</span>
+          <span>{t.noAnomalies}</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-[#111722] border border-slate-800 rounded-xl p-4">
       <div className="flex items-center justify-between mb-3">

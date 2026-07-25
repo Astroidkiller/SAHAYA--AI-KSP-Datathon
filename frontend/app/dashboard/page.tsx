@@ -194,7 +194,7 @@ export default function DashboardPage() {
       {/* Summary Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
-          label={selectedDistrict === "ALL" ? t.totalCases : `${formatDistrict(selectedDistrict, t)} ${t.totalCases}`}
+          label={selectedDistrict === "ALL" ? t.totalCases : `${formatDistrict(selectedDistrict, t)} — ${t.totalCases}`}
           value={loading ? "—" : totalCases}
           icon={<FileText className="w-5 h-5 text-sky-400" />}
           accent="cyan"
@@ -254,12 +254,12 @@ export default function DashboardPage() {
         </div>
 
         {loading ? (
-          <div className="text-xs text-slate-500 animate-pulse py-8 text-center bg-[#111722] border border-slate-800 rounded-xl">
-            Loading hotspot intelligence...
+          <div className="text-xs text-slate-500 animate-pulse py-8 text-center bg-[#111722] border border-slate-800 rounded-xl font-mono">
+            {t.loadingIntelligence}
           </div>
         ) : sortedHotspots.length === 0 ? (
-          <div className="text-xs text-slate-400 py-8 text-center bg-[#111722] border border-slate-800 rounded-xl">
-            No hotspots found matching selected filter.
+          <div className="text-xs text-slate-400 py-8 text-center bg-[#111722] border border-slate-800 rounded-xl font-mono">
+            {t.noHotspots}
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

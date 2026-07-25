@@ -55,19 +55,23 @@ export function Sidebar() {
 
         {/* KSP Official Logo & Branding */}
         <div className="p-4 border-b border-slate-800 bg-[#0f172a]/60">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 flex items-center justify-center bg-[#1e293b] rounded-lg border border-amber-500/40 shadow-inner shrink-0">
+          <Link
+            href="/"
+            className="flex items-center gap-3 hover:opacity-90 transition-all cursor-pointer group"
+            title={t.navChat}
+          >
+            <div className="w-10 h-10 flex items-center justify-center bg-[#1e293b] rounded-lg border border-amber-500/40 shadow-inner shrink-0 group-hover:border-amber-400">
               <Shield className="w-5 h-5 text-amber-400" />
             </div>
             <div>
-              <h1 className="text-base font-extrabold tracking-tight text-slate-100 font-mono">
+              <h1 className="text-base font-extrabold tracking-tight text-slate-100 font-mono group-hover:text-amber-400 transition-colors">
                 {t.appName}
               </h1>
               <p className="text-[9px] text-amber-400/90 uppercase tracking-widest font-mono font-bold">
                 {t.kspTitle}
               </p>
             </div>
-          </div>
+          </Link>
 
           {/* Official Use Tag */}
           <div className="mt-2.5 flex items-center gap-1 text-[9px] font-mono text-slate-400 bg-slate-900/80 px-2 py-0.5 rounded border border-slate-800">
@@ -294,14 +298,28 @@ export function Sidebar() {
                 </div>
                 <button
                   onClick={async () => {
-                    setPingResult("Pinging Gateway...");
+                    setPingResult(t.pingingGateway);
                     const start = Date.now();
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 4000);
                     try {
-                      await fetch("/api/health").catch(() => null);
+                      const res = await fetch("/api/health", { signal: controller.signal });
+                      clearTimeout(timeoutId);
+                      if (!res.ok) {
+                        setPingResult(`${t.gatewayError} (${res.status})`);
+                        return;
+                      }
                       const ms = Date.now() - start;
-                      setPingResult(`Ping: ${ms}ms`);
-                    } catch {
-                      setPingResult(`Ping: ${Date.now() - start}ms`);
+                      setPingResult(`${t.gatewayActive} (${ms}ms)`);
+                    } catch (err: any) {
+                      clearTimeout(timeoutId);
+                      if (err?.name === "AbortError") {
+                        setPingResult(`${t.gatewayOffline} (Timeout)`);
+                      } else if (err?.message?.includes("HTTP")) {
+                        setPingResult(`${t.gatewayError} (${err.message})`);
+                      } else {
+                        setPingResult(t.gatewayOffline);
+                      }
                     }
                   }}
                   className="w-full bg-[#1e293b] py-2 px-3 rounded-lg text-xs font-bold text-slate-200 hover:border-amber-500/40 flex items-center justify-center gap-2 cursor-pointer transition-all border border-slate-800"

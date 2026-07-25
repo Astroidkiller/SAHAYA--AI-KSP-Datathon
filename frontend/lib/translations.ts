@@ -44,6 +44,18 @@ export interface Translations {
   lastSynced: string;
   dataPeriod: string;
 
+  // Gateway Ping & Status
+  pingingGateway: string;
+  gatewayActive: string;
+  gatewayOffline: string;
+  gatewayError: string;
+
+  // Empty & Loading States
+  noAnomalies: string;
+  noHotspots: string;
+  noReports: string;
+  loadingIntelligence: string;
+
   // Dashboard Stats
   totalCases: string;
   risingHotspots: string;
@@ -143,6 +155,18 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     dashboardSubtitle: "Karnataka State Police • State Crime Records Bureau (SCRB)",
     lastSynced: "Synced",
     dataPeriod: "Data Period",
+
+    // Gateway Ping & Status
+    pingingGateway: "Pinging Gateway...",
+    gatewayActive: "Gateway Active",
+    gatewayOffline: "Local Mode (Offline)",
+    gatewayError: "Gateway Error",
+
+    // Empty & Loading States
+    noAnomalies: "No statistical anomalies detected. All trends within 2σ normal variance.",
+    noHotspots: "No hotspots found matching selected filter.",
+    noReports: "No reports found matching search criteria.",
+    loadingIntelligence: "Loading intelligence data...",
 
     // Dashboard Stats
     totalCases: "Total FIR Cases",
@@ -307,6 +331,18 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     dashboardSubtitle: "ಕರ್ನಾಟಕ ರಾಜ್ಯ ಪೊಲೀಸ್ • ರಾಜ್ಯ ಅಪರಾಧ ದಾಖಲೆಗಳ ಬ್ಯೂರೋ (SCRB)",
     lastSynced: "ನವೀಕರಿಸಿದ ಸಮಯ",
     dataPeriod: "ಮಾಹಿತಿಯ ಅವಧಿ",
+
+    // Gateway Ping & Status
+    pingingGateway: "ಗೇಟ್‌ವೇ ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ...",
+    gatewayActive: "ಗೇಟ್‌ವೇ ಸಕ್ರಿಯವಾಗಿದೆ",
+    gatewayOffline: "ಲೋಕಲ್ ಮೋಡ್ (ಆಫ್‌ಲೈನ್)",
+    gatewayError: "ಗೇಟ್‌ವೇ ದೋಷ",
+
+    // Empty & Loading States
+    noAnomalies: "ಯಾವುದೇ ತೀವ್ರ ಅಪರಾಧ ವ್ಯತ್ಯಾಸಗಳು ಕಂಡುಬಂದಿಲ್ಲ (2σ ಸಾಮಾನ್ಯ ಮಟ್ಟ).",
+    noHotspots: "ಆಯ್ಕೆಮಾಡಿದ ಫಿಲ್ಟರ್‌ಗೆ ಯಾವುದೇ ಹಾಟ್‌ಸ್ಪಾಟ್‌ಗಳು ಕಂಡುಬಂದಿಲ್ಲ.",
+    noReports: "ಹುಡುಕಾಟಕ್ಕೆ ಯಾವುದೇ ವರದಿಗಳು ಕಂಡುಬಂದಿಲ್ಲ.",
+    loadingIntelligence: "ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...",
 
     // Dashboard Stats
     totalCases: "ಒಟ್ಟು ಎಫ್‌ಐಆರ್ (FIR) ಪ್ರಕರಣಗಳು",
