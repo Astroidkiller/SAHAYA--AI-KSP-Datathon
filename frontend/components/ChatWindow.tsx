@@ -204,8 +204,37 @@ export function ChatWindow() {
 
     const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.lang = language === "kn" ? "kn-IN" : "en-IN";
-    utterance.rate = 0.9;
-    utterance.pitch = 1.0;
+    utterance.rate = 0.95;
+    utterance.pitch = 1.1; // Natural warm female pitch tone
+
+    // Fetch browser voices & select high-quality female voice
+    const voices = window.speechSynthesis.getVoices();
+    let femaleVoice = null;
+
+    if (language === "kn") {
+      femaleVoice = voices.find(v => v.lang.includes("kn") || v.name.toLowerCase().includes("kannada")) || null;
+    }
+
+    if (!femaleVoice) {
+      // Search for Indian & global natural female voices (Heera, Neerja, Zira, Aria, Jenny, Samantha, Google Female)
+      const femaleKeywords = ["heera", "neerja", "zira", "aria", "jenny", "samantha", "karen", "victoria", "female", "woman"];
+      femaleVoice = voices.find(v => 
+        (v.lang.includes("en-IN") || v.lang.includes("en")) &&
+        femaleKeywords.some(keyword => v.name.toLowerCase().includes(keyword))
+      );
+
+      // Fallback: exclude explicit male voices (David, Mark, George, Ravi, Male)
+      if (!femaleVoice) {
+        femaleVoice = voices.find(v => 
+          v.lang.includes("en") && 
+          !["david", "mark", "george", "ravi", "male", "guy"].some(m => v.name.toLowerCase().includes(m))
+        ) || voices[0] || null;
+      }
+    }
+
+    if (femaleVoice) {
+      utterance.voice = femaleVoice;
+    }
 
     utterance.onend = () => setSpeakingMessageId(null);
     utterance.onerror = () => setSpeakingMessageId(null);
