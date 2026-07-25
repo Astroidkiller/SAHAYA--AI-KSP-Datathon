@@ -1,26 +1,36 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 /**
  * Hook to load JSON data from public/data/ at runtime.
  * Avoids Turbopack panics caused by large static JSON imports.
  */
-export function usePublicData<T>(filename: string, fallback: T): { data: T; loading: boolean } {
+export function usePublicData<T>(
+  filename: string,
+  fallback: T
+): { data: T; loading: boolean; mutate: () => Promise<void>; refetch: () => Promise<void> } {
   const [data, setData] = useState<T>(fallback);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetch(`/data/${filename}`)
-      .then((res) => res.json())
-      .then((json) => {
+  const loadData = useCallback(async () => {
+    try {
+      const res = await fetch(`/data/${filename}?t=${Date.now()}`);
+      if (res.ok) {
+        const json = await res.json();
         setData(json);
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
+      }
+    } catch (e) {
+      // keep fallback
+    } finally {
+      setLoading(false);
+    }
   }, [filename]);
 
-  return { data, loading };
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
+
+  return { data, loading, mutate: loadData, refetch: loadData };
 }
+

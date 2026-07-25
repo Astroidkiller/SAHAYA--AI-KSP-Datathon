@@ -1,0 +1,66 @@
+[
+  {
+    "district": "Bengaluru Urban",
+    "crime_category": "Theft",
+    "case_count": 7,
+    "state_average": 2.4,
+    "spike_ratio": 2.92,
+    "alert": "Bengaluru Urban has 2.92x the state average for Theft"
+  },
+  {
+    "district": "Bengaluru Urban",
+    "crime_category": "Cybercrime",
+    "case_count": 5,
+    "state_average": 2.0,
+    "spike_ratio": 2.5,
+    "alert": "Bengaluru Urban has 2.5x the state average for Cybercrime"
+  },
+  {
+    "district": "Kalaburagi",
+    "crime_category": "Drug",
+    "case_count": 3,
+    "state_average": 1.4,
+    "spike_ratio": 2.1,
+    "alert": "Kalaburagi has 2.1x the state average for Drug"
+  },
+  {
+    "district": "Bengaluru Rural",
+    "crime_category": "Missing",
+    "case_count": 3,
+    "state_average": 1.5,
+    "spike_ratio": 2.0,
+    "alert": "Bengaluru Rural has 2.0x the state average for Missing"
+  },
+  {
+    "district": "Mangaluru",
+    "crime_category": "Robbery",
+    "case_count": 4,
+    "state_average": 2.2,
+    "spike_ratio": 1.85,
+    "alert": "Mangaluru has 1.85x the state average for Robbery"
+  },
+  {
+    "district": "Belagavi",
+    "crime_category": "Fraud",
+    "case_count": 3,
+    "state_average": 1.7,
+    "spike_ratio": 1.75,
+    "alert": "Belagavi has 1.75x the state average for Fraud"
+  },
+  {
+    "district": "Davangere",
+    "crime_category": "Fraud",
+    "case_count": 3,
+    "state_average": 1.7,
+    "spike_ratio": 1.75,
+    "alert": "Davangere has 1.75x the state average for Fraud"
+  },
+  {
+    "district": "Mangaluru",
+    "crime_category": "Assault",
+    "case_count": 2,
+    "state_average": 1.2,
+    "spike_ratio": 1.6,
+    "alert": "Mangaluru has 1.6x the state average for Assault"
+  }
+]

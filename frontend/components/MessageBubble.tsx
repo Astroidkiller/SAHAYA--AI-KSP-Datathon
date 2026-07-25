@@ -1,6 +1,6 @@
 "use client";
 
-import { CSSProperties } from "react";
+import { CSSProperties, useState, useEffect } from "react";
 import { Sparkles, User, Volume2, VolumeX } from "lucide-react";
 import { ExplainabilityPanel } from "./ExplainabilityPanel";
 import type { ChatMessage } from "@/lib/mock-data";
@@ -14,6 +14,16 @@ interface MessageBubbleProps {
 
 export function MessageBubble({ message, style, onSpeak, isSpeaking }: MessageBubbleProps) {
   const isUser = message.role === "user";
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const formattedTime = new Date(message.timestamp).toLocaleTimeString("en-IN", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
   return (
     <div
@@ -106,14 +116,12 @@ export function MessageBubble({ message, style, onSpeak, isSpeaking }: MessageBu
 
         {/* Timestamp */}
         <p
+          suppressHydrationWarning
           className={`text-[10px] text-[var(--color-text-tertiary)] ${
             isUser ? "text-right" : ""
           }`}
         >
-          {new Date(message.timestamp).toLocaleTimeString("en-IN", {
-            hour: "2-digit",
-            minute: "2-digit",
-          })}
+          {mounted ? formattedTime : ""}
         </p>
       </div>
     </div>
@@ -136,3 +144,4 @@ function renderInlineFormatting(text: string) {
     return <span key={i}>{part}</span>;
   });
 }
+

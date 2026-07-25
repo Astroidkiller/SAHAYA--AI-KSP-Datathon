@@ -1,45 +1,44 @@
 @import "tailwindcss";
 
-/* ── SAHAYA AI Design System — "Police Intelligence" Dark Theme ── */
+/* ── SAHAYA AI Design System — Slate & Warm Copper Intelligence Palette ── */
 
 @theme inline {
-  /* Base Colors */
-  --color-bg-primary: #060a14;
-  --color-bg-secondary: #0c1221;
-  --color-bg-tertiary: #111a2e;
-  --color-bg-elevated: #162037;
-  --color-bg-surface: #1a2744;
+  /* Base Palette from User Swatches */
+  --color-bg-primary: #121618;     /* Swatch 6: Deepest Midnight Charcoal */
+  --color-bg-secondary: #10232A;   /* Swatch 1: Deep Navy Slate */
+  --color-bg-tertiary: #1B2C33;    /* Elevated Slate Container */
+  --color-bg-elevated: #3D4D55;    /* Swatch 2: Slate Blue-Grey */
+  --color-bg-surface: #22323A;     /* Surface Panel */
 
   /* Accent Colors */
-  --color-accent-cyan: #00d4ff;
-  --color-accent-cyan-dim: #00a3c7;
-  --color-accent-amber: #f59e0b;
-  --color-accent-red: #ef4444;
-  --color-accent-green: #22c55e;
-  --color-accent-purple: #a855f7;
-  --color-accent-blue: #3b82f6;
+  --color-accent-amber: #B58863;   /* Swatch 5: Warm Caramel Copper */
+  --color-accent-copper: #B58863;  /* Primary Action Highlight */
+  --color-accent-cyan: #38bdf8;    /* Subtle Indicator Cyan */
+  --color-accent-red: #e11d48;     /* Alert Red */
+  --color-accent-green: #10b981;   /* Status Green */
+  --color-accent-purple: #8b5cf6;  /* Intelligence Purple */
 
-  /* Text */
-  --color-text-primary: #e2e8f0;
-  --color-text-secondary: #94a3b8;
-  --color-text-tertiary: #64748b;
-  --color-text-accent: #00d4ff;
+  /* Typography */
+  --color-text-primary: #F4EFEA;   /* Primary Warm White */
+  --color-text-secondary: #D3C3B9; /* Swatch 4: Warm Sand Beige */
+  --color-text-tertiary: #A79E9C;  /* Swatch 3: Cool Stone Grey */
+  --color-text-accent: #B58863;   /* Copper Text Accent */
 
   /* Borders */
-  --color-border-default: #1e293b;
-  --color-border-subtle: #162037;
-  --color-border-accent: rgba(0, 212, 255, 0.3);
+  --color-border-default: rgba(167, 158, 156, 0.15); /* Stone Grey Subtle Border */
+  --color-border-subtle: rgba(211, 195, 185, 0.1);
+  --color-border-accent: rgba(181, 136, 99, 0.4);   /* Warm Copper Border Accent */
 
   /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-/* ── Base Styles ── */
+/* ── Base Reset & Custom Scrollbars ── */
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #1e293b #060a14;
+  scrollbar-color: #3D4D55 #121618;
 }
 
 *::-webkit-scrollbar {
@@ -48,16 +47,16 @@
 }
 
 *::-webkit-scrollbar-track {
-  background: #060a14;
+  background: #121618;
 }
 
 *::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 3px;
+  background: #3D4D55;
+  border-radius: 9999px;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #A79E9C;
 }
 
 html {
@@ -68,62 +67,54 @@ body {
   background: var(--color-bg-primary);
   color: var(--color-text-primary);
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.011em;
 }
 
-/* ── Glass Effect Utilities ── */
+/* ── Glass Panels & Surfaces ── */
 
 .glass-panel {
-  background: rgba(12, 18, 33, 0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(30, 41, 59, 0.5);
+  background: rgba(16, 35, 42, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(167, 158, 156, 0.12);
 }
 
 .glass-card {
-  background: rgba(22, 32, 55, 0.6);
+  background: rgba(27, 44, 51, 0.65);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(167, 158, 156, 0.15);
+  border-radius: 20px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ── Glow Effects ── */
-
-.glow-cyan {
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.15), 0 0 40px rgba(0, 212, 255, 0.05);
+.glass-card:hover {
+  border-color: rgba(181, 136, 99, 0.4);
+  background: rgba(27, 44, 51, 0.85);
+  transform: translateY(-1px);
 }
+
+/* ── Subtle Glow Effects ── */
 
 .glow-amber {
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.15), 0 0 40px rgba(245, 158, 11, 0.05);
-}
-
-.glow-red {
-  box-shadow: 0 0 20px rgba(239, 68, 68, 0.15), 0 0 40px rgba(239, 68, 68, 0.05);
-}
-
-.glow-green {
-  box-shadow: 0 0 20px rgba(34, 197, 94, 0.15), 0 0 40px rgba(34, 197, 94, 0.05);
+  box-shadow: 0 4px 20px -2px rgba(181, 136, 99, 0.2);
 }
 
 /* ── Animations ── */
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-16px); }
+  from { opacity: 0; transform: translateX(-12px); }
   to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideInRight {
-  from { opacity: 0; transform: translateX(16px); }
+  from { opacity: 0; transform: translateX(12px); }
   to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 8px rgba(0, 212, 255, 0.3); }
-  50% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.6); }
 }
 
 @keyframes typing-dot {
@@ -131,33 +122,24 @@ body {
   40% { transform: scale(1); opacity: 1; }
 }
 
-@keyframes scan-line {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100%); }
-}
-
 .animate-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-slide-left {
-  animation: slideInLeft 0.3s ease-out forwards;
+  animation: slideInLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-slide-right {
-  animation: slideInRight 0.3s ease-out forwards;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* ── Typing Indicator ── */
 
 .typing-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--color-accent-cyan);
+  width: 5px;
+  height: 5px;
+  background: #B58863;
   border-radius: 50%;
   animation: typing-dot 1.4s ease-in-out infinite;
 }
@@ -168,146 +150,125 @@ body {
 /* ── Risk Level Badges ── */
 
 .risk-high {
-  background: rgba(239, 68, 68, 0.15);
-  color: #ef4444;
-  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: rgba(225, 29, 72, 0.12);
+  color: #f43f5e;
+  border: 1px solid rgba(225, 29, 72, 0.3);
+  border-radius: 10px;
 }
 
 .risk-medium {
-  background: rgba(245, 158, 11, 0.15);
-  color: #f59e0b;
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  background: rgba(181, 136, 99, 0.18);
+  color: #B58863;
+  border: 1px solid rgba(181, 136, 99, 0.4);
+  border-radius: 10px;
 }
 
 .risk-low {
-  background: rgba(34, 197, 94, 0.15);
-  color: #22c55e;
-  border: 1px solid rgba(34, 197, 94, 0.3);
-}
-
-/* ── Trend Indicators ── */
-
-.trend-rising {
-  color: #ef4444;
-}
-
-.trend-stable {
-  color: #f59e0b;
-}
-
-.trend-declining {
-  color: #22c55e;
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 10px;
 }
 
 /* ── Chat Bubbles ── */
 
 .chat-bubble-user {
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 163, 199, 0.1) 100%);
-  border: 1px solid rgba(0, 212, 255, 0.25);
-  border-radius: 16px 16px 4px 16px;
+  background: #B58863;
+  color: #121618;
+  border-radius: 20px 20px 4px 20px;
+  font-weight: 500;
+  box-shadow: 0 4px 14px rgba(181, 136, 99, 0.25);
 }
 
 .chat-bubble-ai {
-  background: rgba(22, 32, 55, 0.6);
-  border: 1px solid rgba(30, 41, 59, 0.4);
-  border-radius: 16px 16px 16px 4px;
+  background: rgba(27, 44, 51, 0.8);
+  border: 1px solid rgba(167, 158, 156, 0.18);
+  border-radius: 20px 20px 20px 4px;
 }
 
 /* ── Source Badges ── */
 
 .source-badge-db {
-  background: rgba(34, 197, 94, 0.12);
-  border: 1px solid rgba(34, 197, 94, 0.3);
-  color: #22c55e;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #10b981;
+  border-radius: 8px;
 }
 
 .source-badge-rag {
-  background: rgba(168, 85, 247, 0.12);
-  border: 1px solid rgba(168, 85, 247, 0.3);
-  color: #a855f7;
+  background: rgba(181, 136, 99, 0.15);
+  border: 1px solid rgba(181, 136, 99, 0.35);
+  color: #D3C3B9;
+  border-radius: 8px;
 }
 
-/* ── Sidebar ── */
+/* ── Sidebar Navigation ── */
 
 .sidebar-link {
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 14px;
 }
 
 .sidebar-link:hover {
-  background: rgba(0, 212, 255, 0.08);
-  border-color: rgba(0, 212, 255, 0.2);
+  background: rgba(167, 158, 156, 0.08);
+  color: #F4EFEA;
 }
 
 .sidebar-link.active {
-  background: rgba(0, 212, 255, 0.12);
-  border-left: 2px solid #00d4ff;
-  color: #00d4ff;
+  background: rgba(181, 136, 99, 0.18);
+  border: 1px solid rgba(181, 136, 99, 0.4);
+  color: #B58863;
+  font-weight: 600;
 }
 
-/* ── Gradient Text ── */
+/* ── Headings & Titles ── */
 
 .gradient-text {
-  background: linear-gradient(135deg, #00d4ff 0%, #3b82f6 50%, #a855f7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #F4EFEA;
+  font-weight: 700;
 }
 
 /* ── Network Graph Container ── */
 
 .graph-container {
-  background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.03) 0%, transparent 70%);
-  border: 1px solid var(--color-border-default);
-  border-radius: 12px;
+  background: #10232A;
+  border: 1px solid rgba(167, 158, 156, 0.15);
+  border-radius: 20px;
   overflow: hidden;
   position: relative;
-}
-
-.graph-container::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: 
-    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ── Hotspot Card Sparkline ── */
-
-.sparkline-bar {
-  transition: height 0.3s ease-out;
 }
 
 /* ── Input Styles ── */
 
 .chat-input {
-  background: rgba(12, 18, 33, 0.9);
-  border: 1px solid var(--color-border-default);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.chat-input:focus {
-  border-color: var(--color-accent-cyan);
-  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
-  outline: none;
-}
-
-/* ── Button Styles ── */
-
-.btn-primary {
-  background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
-  color: #060a14;
-  font-weight: 600;
+  background: rgba(16, 35, 42, 0.9);
+  border: 1px solid rgba(167, 158, 156, 0.2);
+  border-radius: 16px;
+  color: #F4EFEA;
   transition: all 0.2s ease;
 }
 
+.chat-input:focus {
+  border-color: #B58863;
+  box-shadow: 0 0 0 3px rgba(181, 136, 99, 0.18);
+  outline: none;
+}
+
+/* ── Buttons (Warm Copper & Stone Accent) ── */
+
+.btn-primary {
+  background: #B58863;
+  color: #121618;
+  font-weight: 600;
+  border-radius: 14px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(181, 136, 99, 0.25);
+}
+
 .btn-primary:hover {
-  background: linear-gradient(135deg, #00e5ff 0%, #00b8e6 100%);
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+  background: #C69872;
   transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(181, 136, 99, 0.35);
 }
 
 .btn-primary:active {
@@ -316,29 +277,32 @@ body {
 
 .btn-ghost {
   background: transparent;
-  border: 1px solid var(--color-border-default);
+  border: 1px solid rgba(167, 158, 156, 0.2);
   color: var(--color-text-secondary);
+  border-radius: 14px;
   transition: all 0.2s ease;
 }
 
 .btn-ghost:hover {
-  background: rgba(0, 212, 255, 0.08);
-  border-color: rgba(0, 212, 255, 0.3);
+  background: rgba(167, 158, 156, 0.1);
+  border-color: rgba(181, 136, 99, 0.4);
   color: var(--color-text-primary);
 }
 
-/* ── KSP Logo Pulse ── */
+/* ── KSP Logo Ring ── */
 
 .ksp-logo-ring {
-  border: 2px solid rgba(0, 212, 255, 0.4);
-  border-radius: 50%;
-  animation: pulse-glow 3s ease-in-out infinite;
+  border: 1px solid rgba(181, 136, 99, 0.4);
+  border-radius: 14px;
+  background: rgba(27, 44, 51, 0.7);
 }
 
 /* ── Mic Recording ── */
 
 .mic-recording {
-  animation: pulse-glow 1s ease-in-out infinite;
-  background: rgba(239, 68, 68, 0.2) !important;
-  border-color: #ef4444 !important;
+  background: rgba(225, 29, 72, 0.15) !important;
+  border-color: #e11d48 !important;
+  color: #e11d48 !important;
 }
+
+
