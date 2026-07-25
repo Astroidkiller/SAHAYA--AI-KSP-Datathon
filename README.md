@@ -230,8 +230,8 @@ Full technical telemetry available in **[PERFORMANCE_BENCHMARK_REPORT.md](PERFOR
 
 Built for the **Karnataka State Police (KSP) Datathon 2026** in collaboration with **Zoho Catalyst**.
 
-- **Lead Developer & Architect**: Yashas
-- **Collaborators**: Gagan, Nikhil Narwankar, Priyanka Jain, Aarush
+- **Lead Developer & Architect**: Yashu , Gagan
+- **Collaborators**: Nikhil Narwankar, Priyanka Jain, Aarush
 
 ---
 
