@@ -220,7 +220,7 @@ export function ChatWindow() {
 
     const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.lang = language === "kn" ? "kn-IN" : "en-IN";
-    utterance.rate = 1.0; // 1x Natural Normal Speed
+    utterance.rate = 1.1; // 1.1x Fast Natural Female Speed
     utterance.pitch = 1.1; // Warm female pitch tone
 
     // Fetch browser voices & select high-quality female voice
