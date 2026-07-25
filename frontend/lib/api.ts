@@ -6,7 +6,7 @@
 // When unset, falls back to mock responses for offline development.
 
 import type { ChatResponse } from "./mock-data";
-import { MOCK_RESPONSES } from "./mock-data";
+import { MOCK_RESPONSES, KANNADA_MOCK_RESPONSES } from "./mock-data";
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL ||
@@ -23,10 +23,11 @@ export function isLiveAPI(): boolean {
  */
 export async function sendChatMessage(
   message: string,
-  sessionId: string | null
+  sessionId: string | null,
+  language: string = "en"
 ): Promise<ChatResponse> {
   if (!isLiveAPI()) {
-    return sendMockMessage(message);
+    return sendMockMessage(message, language);
   }
 
   try {
@@ -36,7 +37,7 @@ export async function sendChatMessage(
       body: JSON.stringify({
         message,
         session_id: sessionId,
-        language: "en",
+        language: language,
       }),
     });
 
@@ -73,13 +74,15 @@ export async function sendChatMessage(
  * Mock message handler — simulates API responses from hardcoded data.
  * Adds realistic delay to simulate network latency.
  */
-async function sendMockMessage(message: string): Promise<ChatResponse> {
+async function sendMockMessage(message: string, language: string): Promise<ChatResponse> {
   // Simulate network delay
   await new Promise((resolve) =>
     setTimeout(resolve, 800 + Math.random() * 1000)
   );
 
   const lower = message.toLowerCase();
+  const isKannada = language === "kn" || /[\u0C80-\u0CFF]/.test(message);
+  const responses = isKannada ? KANNADA_MOCK_RESPONSES : MOCK_RESPONSES;
 
   // Profile intent
   if (
@@ -90,9 +93,11 @@ async function sendMockMessage(message: string): Promise<ChatResponse> {
     lower.includes("his cases") ||
     lower.includes("her cases") ||
     lower.includes("risk score") ||
-    lower.includes("repeat offender")
+    lower.includes("repeat offender") ||
+    lower.includes("ರವಿ") ||
+    lower.includes("ಆರೋಪಿ")
   ) {
-    return MOCK_RESPONSES.profile_suspect;
+    return responses.profile_suspect;
   }
 
   // Summary intent
@@ -101,9 +106,10 @@ async function sendMockMessage(message: string): Promise<ChatResponse> {
     lower.includes("summarize") ||
     lower.includes("similar cases") ||
     lower.includes("cases like") ||
-    lower.includes("fir-")
+    lower.includes("fir-") ||
+    lower.includes("ಸಾರಾಂಶ")
   ) {
-    return MOCK_RESPONSES.summary_case;
+    return responses.summary_case;
   }
 
   // Network intent
@@ -113,9 +119,11 @@ async function sendMockMessage(message: string): Promise<ChatResponse> {
     lower.includes("ring") ||
     lower.includes("connection") ||
     lower.includes("graph") ||
-    lower.includes("gang")
+    lower.includes("gang") ||
+    lower.includes("ನೆಟ್‌ವರ್ಕ್") ||
+    lower.includes("ಜಾಲ")
   ) {
-    return MOCK_RESPONSES.network_crime_ring;
+    return responses.network_crime_ring;
   }
 
   // Fact intent
@@ -129,11 +137,15 @@ async function sendMockMessage(message: string): Promise<ChatResponse> {
     lower.includes("district") ||
     lower.includes("spike") ||
     lower.includes("trend") ||
-    lower.includes("emerging")
+    lower.includes("emerging") ||
+    lower.includes("ಯಾವ") ||
+    lower.includes("ಹೆಚ್ಚಿನ") ||
+    lower.includes("ಜಿಲ್ಲೆ") ||
+    lower.includes("ಕಳ್ಳತನ")
   ) {
-    return MOCK_RESPONSES.fact_highest_theft;
+    return responses.fact_highest_theft;
   }
 
   // Default: narrative
-  return MOCK_RESPONSES.narrative_mo_pattern;
+  return responses.narrative_mo_pattern;
 }
