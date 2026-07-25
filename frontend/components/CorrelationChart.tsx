@@ -54,7 +54,10 @@ function pearsonCorrelation(data: DataPoint[]): number {
   return den === 0 ? 0 : num / den;
 }
 
+import { useLanguage } from "@/lib/language-context";
+
 export function CorrelationChart() {
+  const { t } = useLanguage();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [metric, setMetric] = useState<MetricKey>("urbanization_pct");
   const { data: demographics, loading: loadingDemo } = usePublicData<DistrictDemographics[]>("karnataka_districts.json", []);
@@ -224,9 +227,9 @@ export function CorrelationChart() {
     <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] p-4">
       <div className="flex items-center justify-between mb-3">
         <div>
-          <h3 className="text-sm font-semibold text-[var(--color-text-primary)]">
-            📊 Socio-Economic Correlation
-          </h3>
+          <h3 className="text-sm font-bold text-slate-100 uppercase tracking-wider flex items-center gap-2">
+          <span>📊</span> {t.correlationTitle}
+        </h3>
           <p className="text-xs text-[var(--color-text-muted)] mt-0.5">
             Crime rate vs. demographic indicators
           </p>

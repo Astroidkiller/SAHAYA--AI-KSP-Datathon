@@ -2,13 +2,15 @@
 
 import { useMemo } from "react";
 import { usePublicData } from "@/lib/use-public-data";
+import { useLanguage } from "@/lib/language-context";
 
 /**
  * Time-of-Day × Day-of-Week Crime Heatmap
  * A 7×24 grid showing crime frequency patterns.
  */
 
-const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const DAYS_EN = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const DAYS_KN = ["ಸೋಮ", "ಮಂಗಳ", "ಬುಧ", "ಗುರು", "ಶುಕ್ರ", "ಶನಿ", "ಭಾನುವಾರ"];
 const HOURS = Array.from({ length: 24 }, (_, i) => i);
 
 function getHeatColor(value: number, max: number): string {
@@ -39,121 +41,96 @@ interface FIRRecord {
 }
 
 export function TimeHeatmap({ categoryFilter }: TimeHeatmapProps) {
+  const { language, t } = useLanguage();
   const { data: firData, loading } = usePublicData<FIRRecord[]>("fir_records.json", []);
+
+  const DAYS = language === "kn" ? DAYS_KN : DAYS_EN;
 
   const { grid, maxVal, totalCrimes, peakTime } = useMemo(() => {
     const g: number[][] = Array.from({ length: 7 }, () => Array(24).fill(0));
     let total = 0;
-
-    for (const fir of firData) {
-      if (categoryFilter && fir.category !== categoryFilter) continue;
-      const dayIdx = DAYS.indexOf(fir.day_of_week);
-      const hour = fir.hour_of_day;
-      if (dayIdx >= 0 && hour >= 0 && hour < 24) {
-        g[dayIdx][hour]++;
-        total++;
-      }
-    }
-
     let max = 0;
-    let peakDay = 0;
-    let peakHour = 0;
-    for (let d = 0; d < 7; d++) {
-      for (let h = 0; h < 24; h++) {
-        if (g[d][h] > max) {
-          max = g[d][h];
-          peakDay = d;
-          peakHour = h;
+    let peak = { day: "", hour: 0, count: 0 };
+
+    const dayIndexMap: Record<string, number> = {
+      Monday: 0, Tuesday: 1, Wednesday: 2, Thursday: 3, Friday: 4, Saturday: 5, Sunday: 6,
+    };
+
+    firData.forEach((fir) => {
+      if (categoryFilter && fir.category.toLowerCase() !== categoryFilter.toLowerCase()) return;
+      const dIdx = dayIndexMap[fir.day_of_week];
+      const hIdx = fir.hour_of_day;
+      if (dIdx !== undefined && hIdx !== undefined && hIdx >= 0 && hIdx < 24) {
+        g[dIdx][hIdx]++;
+        total++;
+        if (g[dIdx][hIdx] > max) {
+          max = g[dIdx][hIdx];
+          peak = { day: DAYS_EN[dIdx], hour: hIdx, count: g[dIdx][hIdx] };
         }
       }
-    }
+    });
 
-    return {
-      grid: g,
-      maxVal: max,
-      totalCrimes: total,
-      peakTime: max > 0 ? `${DAYS[peakDay]} ${formatHour(peakHour)}-${formatHour((peakHour + 1) % 24)}` : "N/A",
-    };
+    return { grid: g, maxVal: max, totalCrimes: total, peakTime: max > 0 ? peak : null };
   }, [firData, categoryFilter]);
 
   if (loading) {
     return (
-      <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] p-4 h-64 flex items-center justify-center">
-        <div className="text-sm text-[var(--color-text-muted)] animate-pulse">Loading heatmap...</div>
+      <div className="bg-[#111722] border border-slate-800 rounded-xl p-4 h-64 flex items-center justify-center">
+        <div className="text-xs font-mono text-slate-500 animate-pulse">Loading heatmap...</div>
       </div>
     );
   }
 
   return (
-    <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] p-4">
+    <div className="bg-[#111722] border border-slate-800 rounded-xl p-4">
       <div className="flex items-center justify-between mb-3">
-        <div>
-          <h3 className="text-sm font-semibold text-[var(--color-text-primary)]">
-            ⏰ Spatiotemporal Crime Pattern
-          </h3>
-          <p className="text-xs text-[var(--color-text-muted)] mt-0.5">
-            {categoryFilter ? `${categoryFilter} incidents` : "All crime types"} • {totalCrimes} incidents
-          </p>
-        </div>
-        {maxVal > 0 && (
-          <div className="text-right">
-            <div className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider">Peak Time</div>
-            <div className="text-xs font-bold text-[#f59e0b]">{peakTime}</div>
-          </div>
+        <h3 className="text-sm font-bold text-slate-100 uppercase tracking-wider flex items-center gap-2">
+          <span>📅</span> {t.spatiotemporalTitle}
+        </h3>
+        {peakTime && (
+          <span className="text-[10px] font-mono bg-rose-950/40 text-rose-400 border border-rose-500/30 px-2 py-0.5 rounded font-semibold">
+            {t.peakCrimeTime}: {peakTime.day} {formatHour(peakTime.hour)} ({peakTime.count} FIRs)
+          </span>
         )}
       </div>
 
       <div className="overflow-x-auto">
-        <div className="min-w-[600px]">
-          <div className="flex ml-16 mb-1">
-            {HOURS.map((h) => (
-              <div key={h} className="flex-1 text-center text-[9px] text-[var(--color-text-muted)]">
-                {h % 3 === 0 ? formatHour(h) : ""}
-              </div>
-            ))}
-          </div>
-
-          {DAYS.map((day, dayIdx) => (
-            <div key={day} className="flex items-center gap-1 mb-[2px]">
-              <div className="w-14 text-right text-[10px] text-[var(--color-text-muted)] pr-2 shrink-0">
-                {day.slice(0, 3)}
-              </div>
-              <div className="flex flex-1 gap-[1px]">
-                {HOURS.map((hour) => {
-                  const val = grid[dayIdx][hour];
+        <table className="w-full text-center border-collapse">
+          <thead>
+            <tr>
+              <th className="w-12 text-[10px] text-slate-500 font-mono p-1"></th>
+              {HOURS.map((h) => (
+                <th key={h} className="text-[9px] text-slate-400 font-mono p-1">
+                  {formatHour(h)}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {DAYS.map((day, dIdx) => (
+              <tr key={day}>
+                <td className="text-[10px] font-bold text-slate-300 p-1 text-left font-mono">{day}</td>
+                {HOURS.map((hIdx) => {
+                  const val = grid[dIdx][hIdx];
                   return (
-                    <div
-                      key={hour}
-                      className="flex-1 rounded-[2px] transition-all hover:scale-150 hover:z-10 cursor-pointer relative group"
-                      style={{
-                        backgroundColor: getHeatColor(val, maxVal),
-                        height: 18,
-                        minWidth: 4,
-                      }}
-                      title={`${day} ${formatHour(hour)}: ${val} crimes`}
+                    <td
+                      key={hIdx}
+                      className="p-0.5"
+                      title={`${day} ${formatHour(hIdx)}: ${val} incidents`}
                     >
-                      <div className="hidden group-hover:block absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-2 py-1 bg-[#0f172a] border border-[var(--color-border-default)] rounded text-[10px] text-[var(--color-text-primary)] whitespace-nowrap z-20 shadow-xl">
-                        {day} {formatHour(hour)}: <strong>{val}</strong>
+                      <div
+                        className="w-full h-5 rounded-sm transition-all duration-200 hover:scale-115 cursor-pointer flex items-center justify-center text-[9px] font-mono font-bold text-white/90"
+                        style={{ backgroundColor: getHeatColor(val, maxVal) }}
+                      >
+                        {val > 0 ? val : ""}
                       </div>
-                    </div>
+                    </td>
                   );
                 })}
-              </div>
-            </div>
-          ))}
-
-          <div className="flex items-center justify-end gap-2 mt-2 mr-1">
-            <span className="text-[9px] text-[var(--color-text-muted)]">Less</span>
-            {[0, 0.25, 0.5, 0.75, 1].map((r, i) => (
-              <div
-                key={i}
-                className="w-3 h-3 rounded-[2px]"
-                style={{ backgroundColor: getHeatColor(r * maxVal, maxVal) }}
-              />
+              </tr>
             ))}
-            <span className="text-[9px] text-[var(--color-text-muted)]">More</span>
-          </div>
-        </div>
+          </tbody>
+        </table>
       </div>
     </div>
   );
