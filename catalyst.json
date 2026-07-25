@@ -5,6 +5,8 @@
     ]
   },
   "client": {
-    "source": "frontend/out"
+    "source": "frontend/out",
+    "index": "index.html",
+    "error_page": "404.html"
   }
 }
