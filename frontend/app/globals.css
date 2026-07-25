@@ -22,6 +22,7 @@
   --color-text-primary: #F1F5F9;   /* High Contrast White */
   --color-text-secondary: #94A3B8; /* Slate Subtext */
   --color-text-tertiary: #64748B;  /* Muted Muted Grey */
+  --color-text-muted: #64748B;     /* Legacy Muted Support */
   --color-text-accent: #C28254;   /* KSP Copper Text */
 
   /* Crisp Tactical Borders */

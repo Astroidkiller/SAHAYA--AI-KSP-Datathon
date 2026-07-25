@@ -109,6 +109,11 @@ export function ChatWindow() {
       }
     } else {
       setIsRecording(true);
+      const fallbackQuery =
+        language === "kn"
+          ? "ಬೆಂಗಳೂರಿನಲ್ಲಿ ಹೆಚ್ಚಿನ ಕಳ್ಳತನ ಪ್ರಕರಣಗಳು ಯಾವ ಜಿಲ್ಲೆಯಲ್ಲಿ?"
+          : "Which district in Karnataka has the highest theft cases?";
+
       if (typeof window !== "undefined" && ("SpeechRecognition" in window || "webkitSpeechRecognition" in window)) {
         const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
         const recognition = new SpeechRecognition();
@@ -124,7 +129,7 @@ export function ChatWindow() {
           setIsRecording(false);
         };
         recognition.onerror = () => {
-          setInput("ಬೆಂಗಳೂರಿನಲ್ಲಿ ಹೆಚ್ಚಿನ ಕಳ್ಳತನ ಪ್ರಕರಣಗಳು ಯಾವ ಜಿಲ್ಲೆಯಲ್ಲಿ?");
+          setInput(fallbackQuery);
           setIsRecording(false);
         };
         recognition.onend = () => setIsRecording(false);
@@ -133,12 +138,12 @@ export function ChatWindow() {
           recognition.start();
           recognitionRef.current = recognition;
         } catch {
-          setInput("ಬೆಂಗಳೂರಿನಲ್ಲಿ ಹೆಚ್ಚಿನ ಕಳ್ಳತನ ಪ್ರಕರಣಗಳು ಯಾವ ಜಿಲ್ಲೆಯಲ್ಲಿ?");
+          setInput(fallbackQuery);
           setIsRecording(false);
         }
       } else {
         setTimeout(() => {
-          setInput("ಬೆಂಗಳೂರಿನಲ್ಲಿ ಹೆಚ್ಚಿನ ಕಳ್ಳತನ ಪ್ರಕರಣಗಳು ಯಾವ ಜಿಲ್ಲೆಯಲ್ಲಿ?");
+          setInput(fallbackQuery);
           setIsRecording(false);
         }, 1200);
       }
@@ -209,8 +214,8 @@ export function ChatWindow() {
             <div className="flex items-center gap-2">
               <button
                 onClick={handleExportChat}
-                className="bg-[#192231] border border-slate-800 px-2.5 py-1 rounded.lg text-[11px] font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 cursor-pointer"
-                title="Export chat history"
+                className="bg-[#192231] border border-slate-800 px-2.5 py-1 rounded-lg text-[11px] font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 cursor-pointer"
+                title={t.exportSession}
               >
                 <Download className="w-3.5 h-3.5 text-[var(--color-accent-copper)]" />
                 {t.exportSession}

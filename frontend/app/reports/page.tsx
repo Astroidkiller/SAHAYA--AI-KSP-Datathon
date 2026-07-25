@@ -35,7 +35,7 @@ export default function ReportsPage() {
     if (!newTitle.trim()) return;
 
     const newReport = {
-      id: `RPT-00${currentReports.length + 1}`,
+      id: `RPT-${String(currentReports.length + 1).padStart(3, "0")}`,
       title: newTitle.trim(),
       date: new Date().toISOString().split("T")[0],
       type: newType,
@@ -156,7 +156,7 @@ export default function ReportsPage() {
       <div className="space-y-3">
         {filteredReports.length === 0 ? (
           <div className="bg-[#111722] border border-slate-800 rounded-xl p-8 text-center text-xs text-slate-400 font-mono">
-            No reports found matching &quot;{searchQuery}&quot;.
+            {t.noReports} {searchQuery ? `("${searchQuery}")` : ""}
           </div>
         ) : (
           filteredReports.map((report) => (
