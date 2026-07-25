@@ -219,9 +219,6 @@ export function ChatWindow() {
       .substring(0, 500);
 
     const utterance = new SpeechSynthesisUtterance(cleanText);
-    utterance.lang = language === "kn" ? "kn-IN" : "en-IN";
-    utterance.rate = 1.1; // 1.1x Fast Natural Female Speed
-    utterance.pitch = 1.1; // Warm female pitch tone
 
     // Fetch browser voices & select high-quality female voice
     const voices = window.speechSynthesis.getVoices();
@@ -232,23 +229,37 @@ export function ChatWindow() {
     }
 
     if (!femaleVoice && voices.length > 0) {
-      const femaleKeywords = ["heera", "neerja", "zira", "aria", "jenny", "samantha", "karen", "victoria", "female", "woman", "google uk english female"];
+      const priorityNames = [
+        "zira", "heera", "neerja", "aria", "jenny", "samantha",
+        "karen", "victoria", "google us english", "google uk english female",
+        "female", "woman"
+      ];
       
-      // 1. Search for explicit female names first
-      femaleVoice = voices.find(v => femaleKeywords.some(keyword => v.name.toLowerCase().includes(keyword))) || null;
+      for (const name of priorityNames) {
+        const found = voices.find(v => v.name.toLowerCase().includes(name));
+        if (found) {
+          femaleVoice = found;
+          break;
+        }
+      }
 
-      // 2. Fallback: exclude explicit male names (David, Mark, George, Ravi, Male, Guy, James, Richard)
+      // Fallback: exclude explicit male voices
       if (!femaleVoice) {
         femaleVoice = voices.find(v => 
-          v.lang.includes("en") && 
-          !["david", "mark", "george", "ravi", "male", "guy", "james", "richard", "alex"].some(m => v.name.toLowerCase().includes(m))
-        ) || voices[0] || null;
+          !["david", "mark", "george", "ravi", "male", "guy", "james", "richard", "alex", "stefan"].some(m => v.name.toLowerCase().includes(m))
+        ) || null;
       }
     }
 
     if (femaleVoice) {
       utterance.voice = femaleVoice;
+      utterance.lang = femaleVoice.lang;
+    } else {
+      utterance.lang = language === "kn" ? "kn-IN" : "en-US";
     }
+
+    utterance.rate = 1.1;
+    utterance.pitch = 1.25;
 
     utterance.onend = () => setSpeakingMessageId(null);
     utterance.onerror = () => setSpeakingMessageId(null);
