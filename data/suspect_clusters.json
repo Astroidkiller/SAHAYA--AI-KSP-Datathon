@@ -1,0 +1,159 @@
+[
+  {
+    "cluster_id": "CLU-001",
+    "suspect_ids": [
+      "S017",
+      "S018",
+      "S019",
+      "S020",
+      "S022",
+      "S023",
+      "S024",
+      "S025",
+      "S026",
+      "S027",
+      "S028",
+      "S029",
+      "S030",
+      "S031",
+      "S032",
+      "S036",
+      "S037",
+      "S038",
+      "S039",
+      "S040"
+    ],
+    "fir_ids": [
+      "FIR-2024-BEL-0022",
+      "FIR-2024-BEL-0054",
+      "FIR-2024-BEN-0023",
+      "FIR-2024-BEN-0037",
+      "FIR-2024-BEN-0039",
+      "FIR-2024-BEN-0041",
+      "FIR-2024-BEN-0055",
+      "FIR-2024-BEN-0056",
+      "FIR-2024-DAV-0034",
+      "FIR-2024-DAV-0043",
+      "FIR-2024-DAV-0078",
+      "FIR-2024-HUB-0024",
+      "FIR-2024-HUB-0025",
+      "FIR-2024-KAL-0048",
+      "FIR-2024-MAN-0065",
+      "FIR-2024-MAN-0080",
+      "FIR-2024-SHI-0067",
+      "FIR-2024-TUM-0049",
+      "FIR-2025-BEL-0035",
+      "FIR-2025-BEN-0040",
+      "FIR-2025-DAV-0072",
+      "FIR-2025-HUB-0026",
+      "FIR-2025-KAL-0027",
+      "FIR-2025-KAL-0052",
+      "FIR-2025-MAN-0028",
+      "FIR-2025-MYS-0021",
+      "FIR-2025-SHI-0045"
+    ],
+    "cluster_size": 20,
+    "edge_count": 26,
+    "density": 0.137,
+    "leader_suspect": "S026",
+    "leader_centrality": 0.211
+  },
+  {
+    "cluster_id": "CLU-003",
+    "suspect_ids": [
+      "S005",
+      "S006",
+      "S007",
+      "S008",
+      "S009"
+    ],
+    "fir_ids": [
+      "FIR-2024-KAL-0010",
+      "FIR-2024-MAN-0009",
+      "FIR-2024-MYS-0007",
+      "FIR-2025-HUB-0011",
+      "FIR-2025-KAL-0008"
+    ],
+    "cluster_size": 5,
+    "edge_count": 8,
+    "density": 0.8,
+    "leader_suspect": "S006",
+    "leader_centrality": 1.0
+  },
+  {
+    "cluster_id": "CLU-004",
+    "suspect_ids": [
+      "S001",
+      "S002",
+      "S003",
+      "S004"
+    ],
+    "fir_ids": [
+      "FIR-2024-BEN-0001",
+      "FIR-2024-BEN-0006",
+      "FIR-2025-BEN-0002",
+      "FIR-2025-BEN-0003",
+      "FIR-2025-BEN-0004",
+      "FIR-2025-BEN-0005"
+    ],
+    "cluster_size": 4,
+    "edge_count": 6,
+    "density": 1.0,
+    "leader_suspect": "S002",
+    "leader_centrality": 1.0
+  },
+  {
+    "cluster_id": "CLU-005",
+    "suspect_ids": [
+      "S013",
+      "S014",
+      "S015"
+    ],
+    "fir_ids": [
+      "FIR-2025-BEN-0018",
+      "FIR-2025-BEN-0020",
+      "FIR-2025-MAN-0019",
+      "FIR-2025-TUM-0017"
+    ],
+    "cluster_size": 3,
+    "edge_count": 3,
+    "density": 1.0,
+    "leader_suspect": "S014",
+    "leader_centrality": 1.0
+  },
+  {
+    "cluster_id": "CLU-006",
+    "suspect_ids": [
+      "S010",
+      "S011",
+      "S012"
+    ],
+    "fir_ids": [
+      "FIR-2024-BEN-0012",
+      "FIR-2024-BEN-0014",
+      "FIR-2025-BEN-0013",
+      "FIR-2025-BEN-0015",
+      "FIR-2025-BEN-0016"
+    ],
+    "cluster_size": 3,
+    "edge_count": 3,
+    "density": 1.0,
+    "leader_suspect": "S012",
+    "leader_centrality": 1.0
+  },
+  {
+    "cluster_id": "CLU-002",
+    "suspect_ids": [
+      "S021",
+      "S035"
+    ],
+    "fir_ids": [
+      "FIR-2025-KAL-0070"
+    ],
+    "cluster_size": 2,
+    "edge_count": 1,
+    "density": 1.0,
+    "leader_suspect": "S021",
+    "leader_centrality": 1.0
+  }
+]

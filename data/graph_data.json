@@ -1,0 +1,711 @@
+{
+  "nodes": [
+    {
+      "id": "S026",
+      "name": "Shobha Swamy",
+      "risk": "Low",
+      "district": "Belagavi",
+      "group": 1
+    },
+    {
+      "id": "S035",
+      "name": "Rekha Shetty",
+      "risk": "Low",
+      "district": "Bengaluru Urban",
+      "group": 2
+    },
+    {
+      "id": "S009",
+      "name": "Rajesh Nayak",
+      "risk": "High",
+      "district": "Tumakuru",
+      "group": 3
+    },
+    {
+      "id": "S027",
+      "name": "Mahesh Desai",
+      "risk": "Medium",
+      "district": "Shivamogga",
+      "group": 1
+    },
+    {
+      "id": "S001",
+      "name": "Ramesh Kumar",
+      "risk": "Medium",
+      "district": "Kalaburagi",
+      "group": 4
+    },
+    {
+      "id": "S037",
+      "name": "Ramesh Bhat",
+      "risk": "Medium",
+      "district": "Mangaluru",
+      "group": 1
+    },
+    {
+      "id": "S013",
+      "name": "Ravi Naik",
+      "risk": "Medium",
+      "district": "Mysuru",
+      "group": 5
+    },
+    {
+      "id": "S022",
+      "name": "Manjunath Swamy",
+      "risk": "Low",
+      "district": "Hubli-Dharwad",
+      "group": 1
+    },
+    {
+      "id": "S004",
+      "name": "Harish Swamy",
+      "risk": "Medium",
+      "district": "Belagavi",
+      "group": 4
+    },
+    {
+      "id": "S029",
+      "name": "Siddharth Nayak",
+      "risk": "High",
+      "district": "Kalaburagi",
+      "group": 1
+    },
+    {
+      "id": "S017",
+      "name": "Ramesh Hiremath",
+      "risk": "Low",
+      "district": "Bengaluru Rural",
+      "group": 1
+    },
+    {
+      "id": "S039",
+      "name": "Naveen Angadi",
+      "risk": "Low",
+      "district": "Davangere",
+      "group": 1
+    },
+    {
+      "id": "S040",
+      "name": "Harish Gowda",
+      "risk": "Medium",
+      "district": "Davangere",
+      "group": 1
+    },
+    {
+      "id": "S015",
+      "name": "Anand Joshi",
+      "risk": "Medium",
+      "district": "Kalaburagi",
+      "group": 5
+    },
+    {
+      "id": "S025",
+      "name": "Anand Reddy",
+      "risk": "Low",
+      "district": "Tumakuru",
+      "group": 1
+    },
+    {
+      "id": "S012",
+      "name": "Suresh Naik",
+      "risk": "Medium",
+      "district": "Hubli-Dharwad",
+      "group": 6
+    },
+    {
+      "id": "S032",
+      "name": "Chandrashekar Rao",
+      "risk": "Medium",
+      "district": "Tumakuru",
+      "group": 1
+    },
+    {
+      "id": "S020",
+      "name": "Manoj Angadi",
+      "risk": "High",
+      "district": "Kalaburagi",
+      "group": 1
+    },
+    {
+      "id": "S011",
+      "name": "Bharathi Patil",
+      "risk": "Medium",
+      "district": "Bengaluru Rural",
+      "group": 6
+    },
+    {
+      "id": "S003",
+      "name": "Anand Murthy",
+      "risk": "Medium",
+      "district": "Bengaluru Urban",
+      "group": 4
+    },
+    {
+      "id": "S005",
+      "name": "Rajesh Patil",
+      "risk": "High",
+      "district": "Hubli-Dharwad",
+      "group": 3
+    },
+    {
+      "id": "S028",
+      "name": "Shobha Reddy",
+      "risk": "Medium",
+      "district": "Kalaburagi",
+      "group": 1
+    },
+    {
+      "id": "S014",
+      "name": "Anil Reddy",
+      "risk": "Medium",
+      "district": "Davangere",
+      "group": 5
+    },
+    {
+      "id": "S024",
+      "name": "Ganesh Kumar",
+      "risk": "Low",
+      "district": "Belagavi",
+      "group": 1
+    },
+    {
+      "id": "S006",
+      "name": "Anil Hiremath",
+      "risk": "High",
+      "district": "Mysuru",
+      "group": 3
+    },
+    {
+      "id": "S002",
+      "name": "Priya Hiremath",
+      "risk": "Medium",
+      "district": "Kalaburagi",
+      "group": 4
+    },
+    {
+      "id": "S019",
+      "name": "Prakash Hosamani",
+      "risk": "Low",
+      "district": "Shivamogga",
+      "group": 1
+    },
+    {
+      "id": "S021",
+      "name": "Naveen Madiwalar",
+      "risk": "Low",
+      "district": "Shivamogga",
+      "group": 2
+    },
+    {
+      "id": "S007",
+      "name": "Rajesh Bhat",
+      "risk": "High",
+      "district": "Bengaluru Urban",
+      "group": 3
+    },
+    {
+      "id": "S036",
+      "name": "Ganesh Rao",
+      "risk": "Low",
+      "district": "Mysuru",
+      "group": 1
+    },
+    {
+      "id": "S023",
+      "name": "Anand Hosamani",
+      "risk": "Low",
+      "district": "Hubli-Dharwad",
+      "group": 1
+    },
+    {
+      "id": "S030",
+      "name": "Shivaraj Bhat",
+      "risk": "High",
+      "district": "Mangaluru",
+      "group": 1
+    },
+    {
+      "id": "S038",
+      "name": "Kavya Desai",
+      "risk": "Low",
+      "district": "Mangaluru",
+      "group": 1
+    },
+    {
+      "id": "S010",
+      "name": "Lakshmi Angadi",
+      "risk": "High",
+      "district": "Bengaluru Urban",
+      "group": 6
+    },
+    {
+      "id": "S008",
+      "name": "Kiran Hegde",
+      "risk": "High",
+      "district": "Kalaburagi",
+      "group": 3
+    },
+    {
+      "id": "S018",
+      "name": "Ravi Murthy",
+      "risk": "Low",
+      "district": "Hubli-Dharwad",
+      "group": 1
+    },
+    {
+      "id": "S031",
+      "name": "Mahesh Murthy",
+      "risk": "Low",
+      "district": "Tumakuru",
+      "group": 1
+    }
+  ],
+  "links": [
+    {
+      "source": "S026",
+      "target": "S023",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-BEN-0023"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S026",
+      "target": "S039",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2025-HUB-0026"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S026",
+      "target": "S036",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-BEN-0039"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S026",
+      "target": "S040",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-DAV-0078"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S035",
+      "target": "S021",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2025-KAL-0070"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S009",
+      "target": "S007",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-MAN-0009"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S009",
+      "target": "S006",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-MAN-0009"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S009",
+      "target": "S008",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-KAL-0010"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S027",
+      "target": "S032",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2025-SHI-0045"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S027",
+      "target": "S038",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-MAN-0080"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S001",
+      "target": "S002",
+      "weight": 3,
+      "fir_ids": [
+        "FIR-2025-BEN-0002",
+        "FIR-2025-BEN-0005",
+        "FIR-2024-BEN-0006"
+      ],
+      "label": "3 shared FIR(s)"
+    },
+    {
+      "source": "S001",
+      "target": "S004",
+      "weight": 2,
+      "fir_ids": [
+        "FIR-2025-BEN-0002",
+        "FIR-2025-BEN-0005"
+      ],
+      "label": "2 shared FIR(s)"
+    },
+    {
+      "source": "S001",
+      "target": "S003",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-BEN-0006"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S037",
+      "target": "S025",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-HUB-0024"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S037",
+      "target": "S020",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2025-BEL-0035"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S013",
+      "target": "S015",
+      "weight": 2,
+      "fir_ids": [
+        "FIR-2025-TUM-0017",
+        "FIR-2025-MAN-0019"
+      ],
+      "label": "2 shared FIR(s)"
+    },
+    {
+      "source": "S013",
+      "target": "S014",
+      "weight": 3,
+      "fir_ids": [
+        "FIR-2025-BEN-0018",
+        "FIR-2025-MAN-0019",
+        "FIR-2025-BEN-0020"
+      ],
+      "label": "3 shared FIR(s)"
+    },
+    {
+      "source": "S022",
+      "target": "S023",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2025-MAN-0028"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S022",
+      "target": "S031",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2025-BEN-0040"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S004",
+      "target": "S003",
+      "weight": 3,
+      "fir_ids": [
+        "FIR-2024-BEN-0001",
+        "FIR-2025-BEN-0003",
+        "FIR-2025-BEN-0004"
+      ],
+      "label": "3 shared FIR(s)"
+    },
+    {
+      "source": "S004",
+      "target": "S002",
+      "weight": 4,
+      "fir_ids": [
+        "FIR-2024-BEN-0001",
+        "FIR-2025-BEN-0002",
+        "FIR-2025-BEN-0004",
+        "FIR-2025-BEN-0005"
+      ],
+      "label": "4 shared FIR(s)"
+    },
+    {
+      "source": "S029",
+      "target": "S017",
+      "weight": 2,
+      "fir_ids": [
+        "FIR-2024-HUB-0025",
+        "FIR-2025-KAL-0027"
+      ],
+      "label": "2 shared FIR(s)"
+    },
+    {
+      "source": "S029",
+      "target": "S032",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-DAV-0034"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S029",
+      "target": "S019",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-DAV-0043"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S017",
+      "target": "S039",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-TUM-0049"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S017",
+      "target": "S024",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-BEN-0055"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S039",
+      "target": "S028",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-KAL-0048"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S039",
+      "target": "S018",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-BEL-0054"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S015",
+      "target": "S014",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2025-MAN-0019"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S025",
+      "target": "S024",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-BEN-0056"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S025",
+      "target": "S038",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-SHI-0067"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S012",
+      "target": "S010",
+      "weight": 3,
+      "fir_ids": [
+        "FIR-2024-BEN-0012",
+        "FIR-2024-BEN-0014",
+        "FIR-2025-BEN-0016"
+      ],
+      "label": "3 shared FIR(s)"
+    },
+    {
+      "source": "S012",
+      "target": "S011",
+      "weight": 4,
+      "fir_ids": [
+        "FIR-2024-BEN-0012",
+        "FIR-2024-BEN-0014",
+        "FIR-2025-BEN-0015",
+        "FIR-2025-BEN-0016"
+      ],
+      "label": "4 shared FIR(s)"
+    },
+    {
+      "source": "S032",
+      "target": "S031",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2025-MYS-0021"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S032",
+      "target": "S019",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2025-DAV-0072"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S020",
+      "target": "S019",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-BEL-0022"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S020",
+      "target": "S030",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-BEN-0037"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S020",
+      "target": "S028",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2025-KAL-0052"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S011",
+      "target": "S010",
+      "weight": 4,
+      "fir_ids": [
+        "FIR-2024-BEN-0012",
+        "FIR-2025-BEN-0013",
+        "FIR-2024-BEN-0014",
+        "FIR-2025-BEN-0016"
+      ],
+      "label": "4 shared FIR(s)"
+    },
+    {
+      "source": "S003",
+      "target": "S002",
+      "weight": 3,
+      "fir_ids": [
+        "FIR-2024-BEN-0001",
+        "FIR-2025-BEN-0004",
+        "FIR-2024-BEN-0006"
+      ],
+      "label": "3 shared FIR(s)"
+    },
+    {
+      "source": "S005",
+      "target": "S006",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-MYS-0007"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S005",
+      "target": "S007",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-MYS-0007"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S005",
+      "target": "S008",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2025-KAL-0008"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S006",
+      "target": "S007",
+      "weight": 2,
+      "fir_ids": [
+        "FIR-2024-MYS-0007",
+        "FIR-2024-MAN-0009"
+      ],
+      "label": "2 shared FIR(s)"
+    },
+    {
+      "source": "S006",
+      "target": "S008",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2025-HUB-0011"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S030",
+      "target": "S018",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-MAN-0065"
+      ],
+      "label": "1 shared FIR(s)"
+    },
+    {
+      "source": "S038",
+      "target": "S018",
+      "weight": 1,
+      "fir_ids": [
+        "FIR-2024-BEN-0041"
+      ],
+      "label": "1 shared FIR(s)"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 
 /**
  * Hook to load JSON data from public/data/ at runtime.
- * Avoids Turbopack panics caused by large static JSON imports.
+ * Supports multiple path fallbacks for production static hosting (Zoho Slate / Catalyst).
  */
 export function usePublicData<T>(
   filename: string,
@@ -14,17 +14,29 @@ export function usePublicData<T>(
   const [loading, setLoading] = useState(true);
 
   const loadData = useCallback(async () => {
-    try {
-      const res = await fetch(`/data/${filename}?t=${Date.now()}`);
-      if (res.ok) {
-        const json = await res.json();
-        setData(json);
+    const paths = [
+      `/data/${filename}?t=${Date.now()}`,
+      `./data/${filename}?t=${Date.now()}`,
+      `/frontend/out/data/${filename}?t=${Date.now()}`,
+      `/data/samples/${filename}?t=${Date.now()}`,
+    ];
+
+    for (const path of paths) {
+      try {
+        const res = await fetch(path);
+        if (res.ok) {
+          const json = await res.json();
+          if (json && (Array.isArray(json) ? json.length > 0 : Object.keys(json).length > 0)) {
+            setData(json);
+            setLoading(false);
+            return;
+          }
+        }
+      } catch (e) {
+        // try next fallback path
       }
-    } catch (e) {
-      // keep fallback
-    } finally {
-      setLoading(false);
     }
+    setLoading(false);
   }, [filename]);
 
   useEffect(() => {
