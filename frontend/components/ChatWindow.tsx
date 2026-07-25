@@ -184,6 +184,22 @@ export function ChatWindow() {
     }
   };
 
+  // Pre-load voices on mount so 1st click selects female voice without fallback delay
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.speechSynthesis) {
+      window.speechSynthesis.getVoices();
+      const handleVoicesChanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+      window.speechSynthesis.onvoiceschanged = handleVoicesChanged;
+      return () => {
+        if (window.speechSynthesis) {
+          window.speechSynthesis.onvoiceschanged = null;
+        }
+      };
+    }
+  }, []);
+
   const speakResponse = (messageId: string, text: string) => {
     if (typeof window === "undefined" || !window.speechSynthesis) return;
 
@@ -204,30 +220,28 @@ export function ChatWindow() {
 
     const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.lang = language === "kn" ? "kn-IN" : "en-IN";
-    utterance.rate = 0.95;
-    utterance.pitch = 1.1; // Natural warm female pitch tone
+    utterance.rate = 1.0; // 1x Natural Normal Speed
+    utterance.pitch = 1.1; // Warm female pitch tone
 
     // Fetch browser voices & select high-quality female voice
     const voices = window.speechSynthesis.getVoices();
-    let femaleVoice = null;
+    let femaleVoice: SpeechSynthesisVoice | null = null;
 
     if (language === "kn") {
       femaleVoice = voices.find(v => v.lang.includes("kn") || v.name.toLowerCase().includes("kannada")) || null;
     }
 
-    if (!femaleVoice) {
-      // Search for Indian & global natural female voices (Heera, Neerja, Zira, Aria, Jenny, Samantha, Google Female)
-      const femaleKeywords = ["heera", "neerja", "zira", "aria", "jenny", "samantha", "karen", "victoria", "female", "woman"];
-      femaleVoice = voices.find(v => 
-        (v.lang.includes("en-IN") || v.lang.includes("en")) &&
-        femaleKeywords.some(keyword => v.name.toLowerCase().includes(keyword))
-      );
+    if (!femaleVoice && voices.length > 0) {
+      const femaleKeywords = ["heera", "neerja", "zira", "aria", "jenny", "samantha", "karen", "victoria", "female", "woman", "google uk english female"];
+      
+      // 1. Search for explicit female names first
+      femaleVoice = voices.find(v => femaleKeywords.some(keyword => v.name.toLowerCase().includes(keyword))) || null;
 
-      // Fallback: exclude explicit male voices (David, Mark, George, Ravi, Male)
+      // 2. Fallback: exclude explicit male names (David, Mark, George, Ravi, Male, Guy, James, Richard)
       if (!femaleVoice) {
         femaleVoice = voices.find(v => 
           v.lang.includes("en") && 
-          !["david", "mark", "george", "ravi", "male", "guy"].some(m => v.name.toLowerCase().includes(m))
+          !["david", "mark", "george", "ravi", "male", "guy", "james", "richard", "alex"].some(m => v.name.toLowerCase().includes(m))
         ) || voices[0] || null;
       }
     }
