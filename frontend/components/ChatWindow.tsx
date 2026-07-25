@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Send, Mic, MicOff, Sparkles, Network, Download, CheckCircle2 } from "lucide-react";
+import { Send, Mic, MicOff, Shield, Network, Download, CheckCircle2 } from "lucide-react";
 import { MessageBubble } from "./MessageBubble";
 import { NetworkGraph } from "./NetworkGraph";
 import { sendChatMessage } from "@/lib/api";
@@ -11,6 +11,7 @@ import {
   INITIAL_MESSAGES,
   SUGGESTED_QUERIES,
 } from "@/lib/mock-data";
+import { useLanguage } from "@/lib/language-context";
 
 function createMessageId(suffix = "") {
   return `msg-${globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`}${suffix}`;
@@ -21,6 +22,7 @@ function createLocalSessionId() {
 }
 
 export function ChatWindow() {
+  const { language, t } = useLanguage();
   const [messages, setMessages] = useState<ChatMessage[]>(INITIAL_MESSAGES);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -112,7 +114,7 @@ export function ChatWindow() {
         const recognition = new SpeechRecognition();
         recognition.continuous = false;
         recognition.interimResults = false;
-        recognition.lang = "kn-IN"; // Kannada input
+        recognition.lang = language === "kn" ? "kn-IN" : "en-IN";
         
         recognition.onresult = (event: any) => {
           const transcript = event.results[0][0].transcript;
@@ -162,7 +164,7 @@ export function ChatWindow() {
       .substring(0, 500);
 
     const utterance = new SpeechSynthesisUtterance(cleanText);
-    utterance.lang = "en-IN";
+    utterance.lang = language === "kn" ? "kn-IN" : "en-IN";
     utterance.rate = 0.9;
     utterance.pitch = 1.0;
 
@@ -189,33 +191,33 @@ export function ChatWindow() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen overflow-hidden bg-[var(--color-bg-primary)]">
       {/* Chat Panel */}
       <div className={`flex flex-col ${activeGraph ? "w-1/2" : "flex-1"} transition-all duration-300`}>
         {/* Header */}
-        <header className="glass-panel border-b border-[var(--color-border-default)] px-6 py-4">
+        <header className="bg-[#111722] border-b border-slate-800 px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-lg font-semibold text-[var(--color-text-primary)] flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-[var(--color-accent-cyan)]" />
-                Intelligence Chat
+              <h2 className="text-base font-bold text-slate-100 flex items-center gap-2">
+                <Shield className="w-5 h-5 text-[var(--color-accent-copper)]" />
+                {t.chatHeader}
               </h2>
-              <p className="text-xs text-[var(--color-text-tertiary)] mt-0.5">
-                Context-aware • Ask follow-ups like &quot;show his other cases&quot;
+              <p className="text-xs text-slate-400 mt-0.5 font-mono">
+                {t.chatSubtitle}
               </p>
             </div>
             <div className="flex items-center gap-2">
               <button
                 onClick={handleExportChat}
-                className="glass-card px-2.5 py-1 rounded-lg text-[10px] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] flex items-center gap-1.5 cursor-pointer"
+                className="bg-[#192231] border border-slate-800 px-2.5 py-1 rounded.lg text-[11px] font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 cursor-pointer"
                 title="Export chat history"
               >
-                <Download className="w-3 h-3 text-[var(--color-accent-cyan)]" />
-                Export Session
+                <Download className="w-3.5 h-3.5 text-[var(--color-accent-copper)]" />
+                {t.exportSession}
               </button>
               {sessionId && (
-                <span className="text-[10px] font-mono text-[var(--color-accent-green)] bg-[var(--color-bg-tertiary)] px-2 py-1 rounded border border-[var(--color-accent-green)] border-opacity-30">
-                  Active Session
+                <span className="text-[10px] font-mono text-emerald-400 bg-slate-900 px-2 py-1 rounded border border-emerald-500/30">
+                  {t.activeSession}
                 </span>
               )}
             </div>
@@ -237,8 +239,8 @@ export function ChatWindow() {
           {/* Typing Indicator */}
           {isLoading && (
             <div className="flex items-start gap-3 animate-fade-in">
-              <div className="w-8 h-8 rounded-full bg-[var(--color-bg-tertiary)] border border-[var(--color-border-accent)] flex items-center justify-center shrink-0">
-                <Sparkles className="w-4 h-4 text-[var(--color-accent-cyan)]" />
+              <div className="w-8 h-8 rounded-lg bg-[#192231] border border-slate-800 flex items-center justify-center shrink-0">
+                <Shield className="w-4 h-4 text-[var(--color-accent-copper)]" />
               </div>
               <div className="chat-bubble-ai px-4 py-3">
                 <div className="flex items-center gap-1.5">
@@ -256,15 +258,15 @@ export function ChatWindow() {
         {/* Suggested Queries */}
         {messages.length <= 2 && (
           <div className="px-6 pb-3">
-            <p className="text-xs text-[var(--color-text-tertiary)] mb-2">
-              Suggested queries:
+            <p className="text-xs font-semibold text-slate-400 mb-2">
+              {t.suggestedQueriesTitle}
             </p>
             <div className="flex flex-wrap gap-2">
-              {SUGGESTED_QUERIES.map((q) => (
+              {(t.suggestedQueries || SUGGESTED_QUERIES).map((q) => (
                 <button
                   key={q.label}
                   onClick={() => handleSend(q.label)}
-                  className="glass-card text-xs text-[var(--color-text-secondary)] px-3 py-2 rounded-xl hover:border-[var(--color-border-accent)] hover:text-[var(--color-text-primary)] transition-all duration-200 cursor-pointer"
+                  className="bg-[#111722] border border-slate-800 text-xs text-slate-300 px-3 py-1.5 rounded-lg hover:border-[var(--color-border-accent)] hover:text-white transition-all cursor-pointer"
                 >
                   <span className="mr-1.5">{q.icon}</span>
                   {q.label}
@@ -275,18 +277,18 @@ export function ChatWindow() {
         )}
 
         {/* Input Bar */}
-        <div className="glass-panel border-t border-[var(--color-border-default)] p-4">
+        <div className="bg-[#111722] border-t border-slate-800 p-4">
           <div className="flex items-center gap-3">
             {/* Mic Button */}
             <button
               id="btn-mic"
               onClick={toggleRecording}
-              className={`p-3 rounded-xl border transition-all duration-200 cursor-pointer ${
+              className={`p-3 rounded-lg border transition-all cursor-pointer ${
                 isRecording
-                  ? "mic-recording border-[var(--color-accent-red)] text-[var(--color-accent-red)] bg-red-950/30"
-                  : "border-[var(--color-border-default)] text-[var(--color-text-tertiary)] hover:text-[var(--color-accent-cyan)] hover:border-[var(--color-border-accent)]"
+                  ? "bg-rose-950/40 border-rose-600 text-rose-500"
+                  : "border-slate-800 text-slate-400 hover:text-[var(--color-accent-copper)] hover:border-slate-700 bg-[#192231]"
               }`}
-              title={isRecording ? "Stop recording" : "Speak in Kannada"}
+              title="Speak in Kannada/English"
             >
               {isRecording ? <MicOff className="w-5 h-5 animate-pulse" /> : <Mic className="w-5 h-5" />}
             </button>
@@ -301,10 +303,10 @@ export function ChatWindow() {
               onKeyDown={handleKeyDown}
               placeholder={
                 isRecording
-                  ? "🎤 Listening for Kannada voice input..."
-                  : "Ask about crime data, cases, suspects, or profiles..."
+                  ? t.listeningKannada
+                  : t.inputPlaceholder
               }
-              className="chat-input flex-1 px-4 py-3 rounded-xl text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)] focus:outline-none"
+              className="bg-[#0A0D12] border border-slate-800 rounded-lg flex-1 px-4 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-[var(--color-border-accent)]"
               disabled={isLoading}
             />
 
@@ -313,16 +315,16 @@ export function ChatWindow() {
               id="btn-send"
               onClick={() => handleSend()}
               disabled={!input.trim() || isLoading}
-              className="btn-primary p-3 rounded-xl disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+              className="btn-primary px-4 py-2.5 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer flex items-center gap-1.5 text-xs font-bold"
             >
-              <Send className="w-5 h-5" />
+              <Send className="w-4 h-4" />
             </button>
           </div>
 
           {isRecording && (
-            <p className="text-[10px] text-[var(--color-accent-red)] mt-2 flex items-center gap-1.5 ml-14">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-red)] animate-pulse" />
-              Listening for speech... Kannada / English voice auto-transcription enabled.
+            <p className="text-[10px] text-rose-400 mt-2 flex items-center gap-1.5 ml-14 font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse" />
+              {t.listeningSubtext}
             </p>
           )}
         </div>
@@ -330,15 +332,15 @@ export function ChatWindow() {
 
       {/* Graph Panel */}
       {activeGraph && (
-        <div className="w-1/2 border-l border-[var(--color-border-default)] flex flex-col animate-slide-right bg-[var(--color-bg-primary)]">
-          <div className="glass-panel border-b border-[var(--color-border-default)] px-6 py-4 flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-[var(--color-text-primary)] flex items-center gap-2">
-              <Network className="w-4 h-4 text-[var(--color-accent-cyan)]" />
-              Suspect Network Graph
+        <div className="w-1/2 border-l border-slate-800 flex flex-col animate-slide-right bg-[#0A0D12]">
+          <div className="bg-[#111722] border-b border-slate-800 px-6 py-4 flex items-center justify-between">
+            <h3 className="text-xs font-bold text-slate-100 uppercase tracking-wider flex items-center gap-2">
+              <Network className="w-4 h-4 text-[var(--color-accent-copper)]" />
+              {t.networkTitle}
             </h3>
             <button
               onClick={() => setActiveGraph(null)}
-              className="text-xs text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)] cursor-pointer px-2 py-1 rounded hover:bg-[var(--color-bg-tertiary)]"
+              className="text-xs text-slate-400 hover:text-white cursor-pointer px-2 py-1 rounded hover:bg-slate-800"
             >
               Close ✕
             </button>
@@ -351,12 +353,11 @@ export function ChatWindow() {
 
       {/* Export Toast */}
       {exportToast && (
-        <div className="fixed bottom-6 right-6 bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] border border-[var(--color-accent-green)] px-4 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2.5 text-xs font-medium animate-fade-in">
-          <CheckCircle2 className="w-4 h-4 text-[var(--color-accent-green)]" />
-          Chat history saved to text file!
+        <div className="fixed bottom-6 right-6 bg-[#111722] text-slate-100 border border-emerald-500/40 px-4 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2.5 text-xs font-medium animate-fade-in">
+          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+          {t.exportChatToast}
         </div>
       )}
     </div>
   );
 }
-

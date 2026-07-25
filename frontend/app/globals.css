@@ -1,62 +1,62 @@
 @import "tailwindcss";
 
-/* ── SAHAYA AI Design System — Slate & Warm Copper Intelligence Palette ── */
+/* ── SAHAYA AI — Tactical Law Enforcement Portal Palette (Karnataka State Police) ── */
 
 @theme inline {
-  /* Base Palette from User Swatches */
-  --color-bg-primary: #121618;     /* Swatch 6: Deepest Midnight Charcoal */
-  --color-bg-secondary: #10232A;   /* Swatch 1: Deep Navy Slate */
-  --color-bg-tertiary: #1B2C33;    /* Elevated Slate Container */
-  --color-bg-elevated: #3D4D55;    /* Swatch 2: Slate Blue-Grey */
-  --color-bg-surface: #22323A;     /* Surface Panel */
+  /* Tactical Slate & Deep Midnight Navy Palette */
+  --color-bg-primary: #0A0D12;     /* Midnight Tactical Base */
+  --color-bg-secondary: #111722;   /* Deep Police Command Navy */
+  --color-bg-tertiary: #192231;    /* Slate Panel Container */
+  --color-bg-elevated: #243042;    /* Interactive Surface */
+  --color-bg-surface: #1E2838;     /* Surface Panel */
 
-  /* Accent Colors */
-  --color-accent-amber: #B58863;   /* Swatch 5: Warm Caramel Copper */
-  --color-accent-copper: #B58863;  /* Primary Action Highlight */
-  --color-accent-cyan: #38bdf8;    /* Subtle Indicator Cyan */
-  --color-accent-red: #e11d48;     /* Alert Red */
-  --color-accent-green: #10b981;   /* Status Green */
-  --color-accent-purple: #8b5cf6;  /* Intelligence Purple */
+  /* Operational Highlights & Status Indicators */
+  --color-accent-amber: #D97706;   /* Tactical Amber Warning */
+  --color-accent-copper: #C28254;  /* KSP Official Accent */
+  --color-accent-cyan: #38BDF8;    /* Radar Blue */
+  --color-accent-red: #E11D48;     /* Critical Alert Red */
+  --color-accent-green: #10B981;   /* System Normal Green */
+  --color-accent-purple: #8B5CF6;  /* Syndicate Purple */
 
-  /* Typography */
-  --color-text-primary: #F4EFEA;   /* Primary Warm White */
-  --color-text-secondary: #D3C3B9; /* Swatch 4: Warm Sand Beige */
-  --color-text-tertiary: #A79E9C;  /* Swatch 3: Cool Stone Grey */
-  --color-text-accent: #B58863;   /* Copper Text Accent */
+  /* Crisp Professional Typography */
+  --color-text-primary: #F1F5F9;   /* High Contrast White */
+  --color-text-secondary: #94A3B8; /* Slate Subtext */
+  --color-text-tertiary: #64748B;  /* Muted Muted Grey */
+  --color-text-accent: #C28254;   /* KSP Copper Text */
 
-  /* Borders */
-  --color-border-default: rgba(167, 158, 156, 0.15); /* Stone Grey Subtle Border */
-  --color-border-subtle: rgba(211, 195, 185, 0.1);
-  --color-border-accent: rgba(181, 136, 99, 0.4);   /* Warm Copper Border Accent */
+  /* Crisp Tactical Borders */
+  --color-border-default: rgba(148, 163, 184, 0.14); /* Crisp Slate Border */
+  --color-border-subtle: rgba(148, 163, 184, 0.08);
+  --color-border-accent: rgba(194, 130, 84, 0.35);   /* KSP Gold/Copper Border */
 
   /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-/* ── Base Reset & Custom Scrollbars ── */
+/* ── Base Reset & Tactical Scrollbars ── */
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #3D4D55 #121618;
+  scrollbar-color: #243042 #0A0D12;
 }
 
 *::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 *::-webkit-scrollbar-track {
-  background: #121618;
+  background: #0A0D12;
 }
 
 *::-webkit-scrollbar-thumb {
-  background: #3D4D55;
-  border-radius: 9999px;
+  background: #243042;
+  border-radius: 4px;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: #A79E9C;
+  background: #475569;
 }
 
 html {
@@ -67,208 +67,85 @@ body {
   background: var(--color-bg-primary);
   color: var(--color-text-primary);
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
-  letter-spacing: -0.011em;
+  letter-spacing: -0.01em;
 }
 
-/* ── Glass Panels & Surfaces ── */
+/* ── Handcrafted Police Dashboard Panels (No AI Tropes) ── */
 
 .glass-panel {
-  background: rgba(16, 35, 42, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(167, 158, 156, 0.12);
+  background: rgba(17, 23, 34, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(148, 163, 184, 0.14);
 }
 
 .glass-card {
-  background: rgba(27, 44, 51, 0.65);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(167, 158, 156, 0.15);
-  border-radius: 20px;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #111722;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 12px;
+  transition: all 0.2s ease-in-out;
 }
 
 .glass-card:hover {
-  border-color: rgba(181, 136, 99, 0.4);
-  background: rgba(27, 44, 51, 0.85);
-  transform: translateY(-1px);
+  border-color: rgba(194, 130, 84, 0.4);
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.5);
 }
 
-/* ── Subtle Glow Effects ── */
-
-.glow-amber {
-  box-shadow: 0 4px 20px -2px rgba(181, 136, 99, 0.2);
-}
-
-/* ── Animations ── */
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-12px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(12px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes typing-dot {
-  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-  40% { transform: scale(1); opacity: 1; }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-slide-left {
-  animation: slideInLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-slide-right {
-  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* ── Typing Indicator ── */
-
-.typing-dot {
-  width: 5px;
-  height: 5px;
-  background: #B58863;
-  border-radius: 50%;
-  animation: typing-dot 1.4s ease-in-out infinite;
-}
-
-.typing-dot:nth-child(2) { animation-delay: 0.2s; }
-.typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
-/* ── Risk Level Badges ── */
+/* ── Status Badges ── */
 
 .risk-high {
   background: rgba(225, 29, 72, 0.12);
-  color: #f43f5e;
+  color: #F43F5E;
   border: 1px solid rgba(225, 29, 72, 0.3);
-  border-radius: 10px;
+  border-radius: 6px;
+  font-weight: 600;
 }
 
 .risk-medium {
-  background: rgba(181, 136, 99, 0.18);
-  color: #B58863;
-  border: 1px solid rgba(181, 136, 99, 0.4);
-  border-radius: 10px;
+  background: rgba(217, 119, 6, 0.12);
+  color: #F59E0B;
+  border: 1px solid rgba(217, 119, 6, 0.3);
+  border-radius: 6px;
+  font-weight: 600;
 }
 
 .risk-low {
   background: rgba(16, 185, 129, 0.12);
-  color: #10b981;
+  color: #10B981;
   border: 1px solid rgba(16, 185, 129, 0.3);
-  border-radius: 10px;
+  border-radius: 6px;
+  font-weight: 600;
 }
 
-/* ── Chat Bubbles ── */
+/* ── Operational Chat Bubbles ── */
 
 .chat-bubble-user {
-  background: #B58863;
-  color: #121618;
-  border-radius: 20px 20px 4px 20px;
-  font-weight: 500;
-  box-shadow: 0 4px 14px rgba(181, 136, 99, 0.25);
+  background: #C28254;
+  color: #0A0D12;
+  border-radius: 12px 12px 2px 12px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(194, 130, 84, 0.2);
 }
 
 .chat-bubble-ai {
-  background: rgba(27, 44, 51, 0.8);
-  border: 1px solid rgba(167, 158, 156, 0.18);
-  border-radius: 20px 20px 20px 4px;
+  background: #111722;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 12px 12px 12px 2px;
 }
 
-/* ── Source Badges ── */
-
-.source-badge-db {
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  color: #10b981;
-  border-radius: 8px;
-}
-
-.source-badge-rag {
-  background: rgba(181, 136, 99, 0.15);
-  border: 1px solid rgba(181, 136, 99, 0.35);
-  color: #D3C3B9;
-  border-radius: 8px;
-}
-
-/* ── Sidebar Navigation ── */
-
-.sidebar-link {
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  border-radius: 14px;
-}
-
-.sidebar-link:hover {
-  background: rgba(167, 158, 156, 0.08);
-  color: #F4EFEA;
-}
-
-.sidebar-link.active {
-  background: rgba(181, 136, 99, 0.18);
-  border: 1px solid rgba(181, 136, 99, 0.4);
-  color: #B58863;
-  font-weight: 600;
-}
-
-/* ── Headings & Titles ── */
-
-.gradient-text {
-  color: #F4EFEA;
-  font-weight: 700;
-}
-
-/* ── Network Graph Container ── */
-
-.graph-container {
-  background: #10232A;
-  border: 1px solid rgba(167, 158, 156, 0.15);
-  border-radius: 20px;
-  overflow: hidden;
-  position: relative;
-}
-
-/* ── Input Styles ── */
-
-.chat-input {
-  background: rgba(16, 35, 42, 0.9);
-  border: 1px solid rgba(167, 158, 156, 0.2);
-  border-radius: 16px;
-  color: #F4EFEA;
-  transition: all 0.2s ease;
-}
-
-.chat-input:focus {
-  border-color: #B58863;
-  box-shadow: 0 0 0 3px rgba(181, 136, 99, 0.18);
-  outline: none;
-}
-
-/* ── Buttons (Warm Copper & Stone Accent) ── */
+/* ── Tactical Buttons ── */
 
 .btn-primary {
-  background: #B58863;
-  color: #121618;
+  background: #C28254;
+  color: #0A0D12;
   font-weight: 600;
-  border-radius: 14px;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(181, 136, 99, 0.25);
+  border-radius: 8px;
+  transition: all 0.15s ease;
 }
 
 .btn-primary:hover {
-  background: #C69872;
+  background: #D49365;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(181, 136, 99, 0.35);
 }
 
 .btn-primary:active {
@@ -277,32 +154,46 @@ body {
 
 .btn-ghost {
   background: transparent;
-  border: 1px solid rgba(167, 158, 156, 0.2);
+  border: 1px solid rgba(148, 163, 184, 0.2);
   color: var(--color-text-secondary);
-  border-radius: 14px;
-  transition: all 0.2s ease;
+  border-radius: 8px;
+  transition: all 0.15s ease;
 }
 
 .btn-ghost:hover {
-  background: rgba(167, 158, 156, 0.1);
-  border-color: rgba(181, 136, 99, 0.4);
+  background: rgba(148, 163, 184, 0.08);
+  border-color: rgba(194, 130, 84, 0.4);
   color: var(--color-text-primary);
 }
 
-/* ── KSP Logo Ring ── */
-
+/* ── KSP Police Badge Ring ── */
 .ksp-logo-ring {
-  border: 1px solid rgba(181, 136, 99, 0.4);
-  border-radius: 14px;
-  background: rgba(27, 44, 51, 0.7);
+  border: 1px solid rgba(194, 130, 84, 0.4);
+  border-radius: 10px;
+  background: #192231;
 }
 
-/* ── Mic Recording ── */
+/* ── Typing Indicator ── */
+.typing-dot {
+  width: 5px;
+  height: 5px;
+  background: #C28254;
+  border-radius: 50%;
+  animation: typing-dot 1.4s ease-in-out infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
 
-.mic-recording {
-  background: rgba(225, 29, 72, 0.15) !important;
-  border-color: #e11d48 !important;
-  color: #e11d48 !important;
+@keyframes typing-dot {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
 }
 
+.animate-fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
