@@ -49,6 +49,7 @@ export interface Translations {
   gatewayActive: string;
   gatewayOffline: string;
   gatewayError: string;
+  gatewayTimeout: string;
 
   // Empty & Loading States
   noAnomalies: string;
@@ -161,6 +162,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     gatewayActive: "Gateway Active",
     gatewayOffline: "Local Mode (Offline)",
     gatewayError: "Gateway Error",
+    gatewayTimeout: "Timeout",
 
     // Empty & Loading States
     noAnomalies: "No statistical anomalies detected. All trends within 2σ normal variance.",
@@ -337,9 +339,10 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     gatewayActive: "ಗೇಟ್‌ವೇ ಸಕ್ರಿಯವಾಗಿದೆ",
     gatewayOffline: "ಲೋಕಲ್ ಮೋಡ್ (ಆಫ್‌ಲೈನ್)",
     gatewayError: "ಗೇಟ್‌ವೇ ದೋಷ",
+    gatewayTimeout: "ಸಮಯ ಮೀರಿದೆ (Timeout)",
 
     // Empty & Loading States
-    noAnomalies: "ಯಾವುದೇ ತೀವ್ರ ಅಪರಾಧ ವ್ಯತ್ಯಾಸಗಳು ಕಂಡುಬಂದಿಲ್ಲ (2σ ಸಾಮಾನ್ಯ ಮಟ್ಟ).",
+    noAnomalies: "ಯಾವುದೇ ಸಂಖ್ಯಾಶಾಸ್ತ್ರೀಯ ಅಪರಾಧ ವ್ಯತ್ಯಾಸಗಳು ಕಂಡುಬಂದಿಲ್ಲ. ಎಲ್ಲಾ ಪ್ರವೃತ್ತಿಗಳು 2σ ಸಾಮಾನ್ಯ ಮಟ್ಟದಲ್ಲಿವೆ.",
     noHotspots: "ಆಯ್ಕೆಮಾಡಿದ ಫಿಲ್ಟರ್‌ಗೆ ಯಾವುದೇ ಹಾಟ್‌ಸ್ಪಾಟ್‌ಗಳು ಕಂಡುಬಂದಿಲ್ಲ.",
     noReports: "ಹುಡುಕಾಟಕ್ಕೆ ಯಾವುದೇ ವರದಿಗಳು ಕಂಡುಬಂದಿಲ್ಲ.",
     loadingIntelligence: "ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...",

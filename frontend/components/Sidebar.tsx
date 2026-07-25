@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import {
@@ -31,6 +31,7 @@ export function Sidebar() {
   const [autoSync, setAutoSync] = useState(true);
   const [savedToast, setSavedToast] = useState(false);
   const [pingResult, setPingResult] = useState<string | null>(null);
+  const isPingingRef = useRef(false);
 
   const NAV_ITEMS = [
     { href: "/", label: t.navChat, icon: MessageSquare, id: "nav-chat" },
@@ -298,6 +299,8 @@ export function Sidebar() {
                 </div>
                 <button
                   onClick={async () => {
+                    if (isPingingRef.current) return;
+                    isPingingRef.current = true;
                     setPingResult(t.pingingGateway);
                     const start = Date.now();
                     const controller = new AbortController();
@@ -314,12 +317,14 @@ export function Sidebar() {
                     } catch (err: any) {
                       clearTimeout(timeoutId);
                       if (err?.name === "AbortError") {
-                        setPingResult(`${t.gatewayOffline} (Timeout)`);
+                        setPingResult(`${t.gatewayOffline} (${t.gatewayTimeout})`);
                       } else if (err?.message?.includes("HTTP")) {
                         setPingResult(`${t.gatewayError} (${err.message})`);
                       } else {
                         setPingResult(t.gatewayOffline);
                       }
+                    } finally {
+                      isPingingRef.current = false;
                     }
                   }}
                   className="w-full bg-[#1e293b] py-2 px-3 rounded-lg text-xs font-bold text-slate-200 hover:border-amber-500/40 flex items-center justify-center gap-2 cursor-pointer transition-all border border-slate-800"

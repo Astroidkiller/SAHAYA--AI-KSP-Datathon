@@ -34,6 +34,29 @@ export function ChatWindow() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const recognitionRef = useRef<any>(null);
+  const fallbackTimerRef = useRef<any>(null);
+
+  const stopRecognition = useCallback(() => {
+    if (fallbackTimerRef.current) {
+      clearTimeout(fallbackTimerRef.current);
+      fallbackTimerRef.current = null;
+    }
+    if (recognitionRef.current) {
+      try {
+        recognitionRef.current.onresult = null;
+        recognitionRef.current.onerror = null;
+        recognitionRef.current.onend = null;
+        recognitionRef.current.stop();
+      } catch {}
+      recognitionRef.current = null;
+    }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      stopRecognition();
+    };
+  }, [stopRecognition]);
 
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -104,9 +127,7 @@ export function ChatWindow() {
   const toggleRecording = () => {
     if (isRecording) {
       setIsRecording(false);
-      if (recognitionRef.current) {
-        try { recognitionRef.current.stop(); } catch {}
-      }
+      stopRecognition();
     } else {
       setIsRecording(true);
       const fallbackQuery =
@@ -142,9 +163,11 @@ export function ChatWindow() {
           setIsRecording(false);
         }
       } else {
-        setTimeout(() => {
+        if (fallbackTimerRef.current) clearTimeout(fallbackTimerRef.current);
+        fallbackTimerRef.current = setTimeout(() => {
           setInput(fallbackQuery);
           setIsRecording(false);
+          fallbackTimerRef.current = null;
         }, 1200);
       }
     }
