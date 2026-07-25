@@ -27,8 +27,11 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const setLanguage = (lang: Language) => {
+    if (lang !== "en" && lang !== "kn") return;
     setLanguageState(lang);
-    localStorage.setItem("sahaya_lang", lang);
+    try {
+      localStorage.setItem("sahaya_lang", lang);
+    } catch {}
     if (typeof document !== "undefined") {
       document.documentElement.lang = lang;
     }
