@@ -9,6 +9,7 @@ import {
   ChatMessage,
   ChatResponse,
   INITIAL_MESSAGES,
+  getInitialMessages,
   SUGGESTED_QUERIES,
 } from "@/lib/mock-data";
 import { useLanguage } from "@/lib/language-context";
@@ -23,7 +24,7 @@ function createLocalSessionId() {
 
 export function ChatWindow() {
   const { language, t } = useLanguage();
-  const [messages, setMessages] = useState<ChatMessage[]>(INITIAL_MESSAGES);
+  const [messages, setMessages] = useState<ChatMessage[]>(() => getInitialMessages(language));
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
@@ -35,6 +36,16 @@ export function ChatWindow() {
   const inputRef = useRef<HTMLInputElement>(null);
   const recognitionRef = useRef<any>(null);
   const fallbackTimerRef = useRef<any>(null);
+
+  // Sync initial welcome message when language toggles if no conversation history exists
+  useEffect(() => {
+    setMessages((prev) => {
+      if (prev.length === 1 && (prev[0].id === "welcome" || prev[0].id === "welcome-kn")) {
+        return getInitialMessages(language);
+      }
+      return prev;
+    });
+  }, [language]);
 
   const stopRecognition = useCallback(() => {
     if (fallbackTimerRef.current) {
@@ -82,7 +93,7 @@ export function ChatWindow() {
     setIsLoading(true);
 
     try {
-      const response = await sendChatMessage(messageText, sessionId);
+      const response = await sendChatMessage(messageText, sessionId, language);
 
       if (response.session_id) {
         setSessionId(response.session_id);
