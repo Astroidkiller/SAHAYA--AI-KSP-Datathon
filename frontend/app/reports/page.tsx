@@ -114,7 +114,7 @@ export default function ReportsPage() {
           </style>
         </head>
         <body>
-          <div className="meta">KARNATAKA STATE POLICE — SAHAYA AI INTELLIGENCE SYSTEM</div>
+          <div class="meta">KARNATAKA STATE POLICE — SAHAYA AI INTELLIGENCE SYSTEM</div>
           <h1>${report.title}</h1>
           <p><strong>Report ID:</strong> <span class="badge">${report.id}</span> | <strong>Date:</strong> ${report.date}</p>
           <p><strong>Type:</strong> ${report.type} | <strong>District:</strong> ${report.district}</p>
