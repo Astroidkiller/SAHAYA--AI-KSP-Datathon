@@ -35,9 +35,9 @@ export function Sidebar() {
 
   const NAV_ITEMS = [
     { href: "/", label: t.navChat, icon: MessageSquare, id: "nav-chat" },
-    { href: "/dashboard/", label: t.navDashboard, icon: LayoutDashboard, id: "nav-dashboard" },
-    { href: "/network/", label: t.navNetwork, icon: Network, id: "nav-network" },
-    { href: "/reports/", label: t.navReports, icon: FileText, id: "nav-reports" },
+    { href: "/dashboard/index.html", label: t.navDashboard, icon: LayoutDashboard, id: "nav-dashboard" },
+    { href: "/network/index.html", label: t.navNetwork, icon: Network, id: "nav-network" },
+    { href: "/reports/index.html", label: t.navReports, icon: FileText, id: "nav-reports" },
   ];
 
   const handleSaveSettings = () => {
@@ -113,9 +113,14 @@ export function Sidebar() {
         {/* Navigation Links */}
         <nav className="flex-1 p-3 space-y-1">
           {NAV_ITEMS.map((item) => {
-            const cleanPath = (pathname || "").replace(/\/$/, "") || "/";
-            const cleanTarget = item.href.replace(/\/$/, "") || "/";
-            const isActive = cleanPath === cleanTarget;
+            const currentPath = (pathname || "").toLowerCase();
+            const isActive = currentPath.includes("dashboard")
+              ? item.href.includes("dashboard")
+              : currentPath.includes("network")
+              ? item.href.includes("network")
+              : currentPath.includes("reports")
+              ? item.href.includes("reports")
+              : item.href === "/";
             const Icon = item.icon;
             return (
               <a

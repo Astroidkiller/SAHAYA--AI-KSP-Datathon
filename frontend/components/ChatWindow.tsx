@@ -228,13 +228,14 @@ export function ChatWindow() {
       }
 
       if (!femaleVoice && voices.length > 0) {
-        const priorityNames = [
+        // Priority list of female voice names across Windows, Mac, Chrome, Edge, Android, iOS
+        const femaleNames = [
           "zira", "heera", "neerja", "aria", "jenny", "samantha",
-          "karen", "victoria", "google us english", "google uk english female",
-          "female", "woman", "hazel", "susan", "catherine"
+          "karen", "victoria", "hazel", "susan", "catherine", "eva", "lisa",
+          "google us english", "google uk english female", "female", "woman"
         ];
         
-        for (const name of priorityNames) {
+        for (const name of femaleNames) {
           const found = voices.find(v => v.name.toLowerCase().includes(name));
           if (found) {
             femaleVoice = found;
@@ -242,10 +243,12 @@ export function ChatWindow() {
           }
         }
 
+        // Strict male exclusion fallback
         if (!femaleVoice) {
+          const maleNames = ["ravi", "david", "mark", "george", "guy", "james", "richard", "alex", "stefan", "pavel", "sean", "michael", "daniel", "brian", "chris", "male"];
           femaleVoice = voices.find(v => 
-            !["david", "mark", "george", "ravi", "male", "guy", "james", "richard", "alex", "stefan", "pavel", "sean"].some(m => v.name.toLowerCase().includes(m))
-          ) || voices[0] || null;
+            !maleNames.some(m => v.name.toLowerCase().includes(m))
+          ) || null;
         }
       }
 
@@ -257,7 +260,7 @@ export function ChatWindow() {
       }
 
       utterance.rate = 1.1;
-      utterance.pitch = 1.35;
+      utterance.pitch = 1.45; // High warm female vocal pitch
 
       utterance.onend = () => setSpeakingMessageId(null);
       utterance.onerror = () => setSpeakingMessageId(null);

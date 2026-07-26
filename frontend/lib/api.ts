@@ -41,32 +41,17 @@ export async function sendChatMessage(
       }),
     });
 
-    if (!res.ok) {
-      const errorText = await res.text().catch(() => "Unknown error");
-      console.error(`[SAHAYA] API error ${res.status}: ${errorText}`);
-      return {
-        type: "error",
-        answer: `API returned an error (${res.status}). The backend may be unavailable. Please try again.`,
-        data: null,
-        source: null,
-        graph: null,
-        reasoning: [`HTTP ${res.status} from ${API_URL}/api/chat`, errorText],
-      };
+    if (res.ok) {
+      const data: ChatResponse = await res.json();
+      return data;
     }
-
-    const data: ChatResponse = await res.json();
-    return data;
+    
+    // If backend returns 405/404/500 on static hosting, fall back seamlessly
+    console.warn(`[SAHAYA] API returned ${res.status}, falling back to local chat engine.`);
+    return sendMockMessage(message, language);
   } catch (err) {
-    const message_text = err instanceof Error ? err.message : String(err);
-    console.error("[SAHAYA] Network error:", message_text);
-    return {
-      type: "error",
-      answer: `Could not reach the backend. Check your connection or run the chat-api locally on port 3001.\n\nError: ${message_text}`,
-      data: null,
-      source: null,
-      graph: null,
-      reasoning: [`Network error: ${message_text}`, `Endpoint: ${API_URL}/api/chat`],
-    };
+    console.warn("[SAHAYA] Network exception, falling back to local chat engine:", err);
+    return sendMockMessage(message, language);
   }
 }
 
