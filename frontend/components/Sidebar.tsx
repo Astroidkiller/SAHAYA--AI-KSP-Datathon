@@ -123,7 +123,7 @@ export function Sidebar() {
               : item.href === "/";
             const Icon = item.icon;
             return (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 id={item.id}
@@ -139,8 +139,9 @@ export function Sidebar() {
                   <span className="ml-auto w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 )}
                 {isActive && <ChevronRight className="w-3.5 h-3.5 ml-auto text-amber-400" />}
-              </a>
+              </Link>
             );
+
           })}
         </nav>
 
