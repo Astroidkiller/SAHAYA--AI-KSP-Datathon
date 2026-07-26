@@ -8,18 +8,16 @@
 import type { ChatResponse } from "./mock-data";
 import { MOCK_RESPONSES, KANNADA_MOCK_RESPONSES } from "./mock-data";
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL ||
-  (process.env.NODE_ENV === "production" ? "/server/chat-api" : "");
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 /** Whether to use the live API or fall back to mocks. */
 export function isLiveAPI(): boolean {
-  return API_URL.length > 0;
+  return Boolean(process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL.length > 0);
 }
 
 /**
  * Send a chat message to the backend API.
- * Falls back to mock responses if NEXT_PUBLIC_API_URL is not set.
+ * Always falls back to mock intelligence router if live API endpoint is not configured.
  */
 export async function sendChatMessage(
   message: string,
@@ -46,8 +44,7 @@ export async function sendChatMessage(
       return data;
     }
     
-    // If backend returns 405/404/500 on static hosting, fall back seamlessly
-    console.warn(`[SAHAYA] API returned ${res.status}, falling back to local chat engine.`);
+    console.warn(`[SAHAYA] Live API returned ${res.status}, falling back to local chat engine.`);
     return sendMockMessage(message, language);
   } catch (err) {
     console.warn("[SAHAYA] Network exception, falling back to local chat engine:", err);
