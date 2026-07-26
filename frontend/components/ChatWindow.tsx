@@ -221,46 +221,52 @@ export function ChatWindow() {
     const doSpeak = () => {
       const utterance = new SpeechSynthesisUtterance(cleanText);
       const voices = window.speechSynthesis.getVoices();
-      let femaleVoice: SpeechSynthesisVoice | null = null;
+      let selectedVoice: SpeechSynthesisVoice | null = null;
+
+      const maleNames = ["ravi", "david", "mark", "george", "guy", "james", "richard", "alex", "stefan", "pavel", "sean", "michael", "daniel", "brian", "chris", "male"];
 
       if (language === "kn") {
-        femaleVoice = voices.find(v => v.lang.includes("kn") || v.name.toLowerCase().includes("kannada")) || null;
+        // Kannada Mode: Search for Kannada female voice first (Google Kannada / Zia Regional TTS)
+        selectedVoice = voices.find(v => 
+          (v.lang.includes("kn") || v.name.toLowerCase().includes("kannada") || v.name.toLowerCase().includes("ಕನ್ನಡ")) &&
+          !maleNames.some(m => v.name.toLowerCase().includes(m))
+        ) || voices.find(v => v.lang.includes("kn") || v.name.toLowerCase().includes("kannada")) || null;
       }
 
-      if (!femaleVoice && voices.length > 0) {
-        // Priority list of female voice names across Windows, Mac, Chrome, Edge, Android, iOS
-        const femaleNames = [
+      if (!selectedVoice) {
+        // English Mode: Prioritize premium natural female voices (Zira, Heera, Neerja, Aria, Jenny, Samantha, Google Female)
+        const femalePriority = [
           "zira", "heera", "neerja", "aria", "jenny", "samantha",
+          "google us english female", "google uk english female", "google us english",
           "karen", "victoria", "hazel", "susan", "catherine", "eva", "lisa",
-          "google us english", "google uk english female", "female", "woman"
+          "female", "woman"
         ];
         
-        for (const name of femaleNames) {
+        for (const name of femalePriority) {
           const found = voices.find(v => v.name.toLowerCase().includes(name));
           if (found) {
-            femaleVoice = found;
+            selectedVoice = found;
             break;
           }
         }
 
-        // Strict male exclusion fallback
-        if (!femaleVoice) {
-          const maleNames = ["ravi", "david", "mark", "george", "guy", "james", "richard", "alex", "stefan", "pavel", "sean", "michael", "daniel", "brian", "chris", "male"];
-          femaleVoice = voices.find(v => 
+        // Fallback: exclude explicit male names
+        if (!selectedVoice && voices.length > 0) {
+          selectedVoice = voices.find(v => 
             !maleNames.some(m => v.name.toLowerCase().includes(m))
-          ) || null;
+          ) || voices[0] || null;
         }
       }
 
-      if (femaleVoice) {
-        utterance.voice = femaleVoice;
-        utterance.lang = femaleVoice.lang;
+      if (selectedVoice) {
+        utterance.voice = selectedVoice;
+        utterance.lang = selectedVoice.lang;
       } else {
         utterance.lang = language === "kn" ? "kn-IN" : "en-US";
       }
 
       utterance.rate = 1.1;
-      utterance.pitch = 1.45; // High warm female vocal pitch
+      utterance.pitch = 1.4; // High natural female vocal pitch
 
       utterance.onend = () => setSpeakingMessageId(null);
       utterance.onerror = () => setSpeakingMessageId(null);
