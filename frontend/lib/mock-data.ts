@@ -137,6 +137,69 @@ export const MOCK_RESPONSES: Record<string, ChatResponse> = {
     graph: null,
   },
 
+  fact_highest_murder: {
+    type: "fact",
+    answer:
+      "Kalaburagi has the highest murder cases with 2 reported incidents in 2024-2025, but experienced a critical spike of 5 cases in September 2024 (9.9 sigma above normal). The overall trend remains stable, but localized vigilance is advised. ⚠️",
+    data: {
+      district: "Kalaburagi",
+      category: "Murder",
+      count: 2,
+      period: "2024-2025",
+      trend: "Stable",
+      top5: [
+        { district: "Kalaburagi", count: 2 },
+        { district: "Bengaluru Urban", count: 1 },
+        { district: "Mysuru", count: 1 },
+      ],
+    },
+    source: {
+      type: "database",
+      table: "Hotspot_Answers",
+      verified_at: new Date().toISOString(),
+    },
+    reasoning: [
+      "Query type: highest-by-category",
+      "Data source: Hotspot_Answers + Anomaly_Alerts",
+      "Category filter: Murder",
+      "Sorted by count descending",
+      "⚠️ Anomaly detected: Kalaburagi/Murder spiked to 5 in 2024-09 (9.9 sigma above normal)",
+      `Verified at: ${new Date().toISOString()}`,
+    ],
+    graph: null,
+  },
+
+  fact_highest_cyber: {
+    type: "fact",
+    answer:
+      "Bengaluru Urban has the highest cybercrime cases with 8 reported incidents in 2024-2025. The trend is rising, driven primarily by online financial frauds and phishing scams. ⚠️",
+    data: {
+      district: "Bengaluru Urban",
+      category: "Cybercrime",
+      count: 8,
+      period: "2024-2025",
+      trend: "Rising",
+      top5: [
+        { district: "Bengaluru Urban", count: 8 },
+        { district: "Mysuru", count: 2 },
+        { district: "Mangaluru", count: 1 },
+      ],
+    },
+    source: {
+      type: "database",
+      table: "Hotspot_Answers",
+      verified_at: new Date().toISOString(),
+    },
+    reasoning: [
+      "Query type: highest-by-category",
+      "Data source: Hotspot_Answers",
+      "Category filter: Cybercrime",
+      "Sorted by count descending",
+      `Verified at: ${new Date().toISOString()}`,
+    ],
+    graph: null,
+  },
+
   narrative_mo_pattern: {
     type: "narrative",
     answer:
@@ -296,6 +359,18 @@ export const KANNADA_MOCK_RESPONSES: Record<string, ChatResponse> = {
     ...MOCK_RESPONSES.fact_highest_theft,
     answer:
       "ಬೆಂಗಳೂರು ನಗರ (Bengaluru Urban) ಜಿಲ್ಲೆಯಲ್ಲಿ 2024-2025 ರ ಅವಧಿಯಲ್ಲಿ ಒಟ್ಟು 12 ಕಳ್ಳತನ ಪ್ರಕರಣಗಳು ದಾಖಲಾಗಿದ್ದು, ಇದು ರಾಜ್ಯದಲ್ಲೇ ಅತ್ಯಂತ ಹೆಚ್ಚಿನ ಸಂಖ್ಯೆಯಾಗಿದೆ.\n\n• **ಮುಖ್ಯ ಅಪರಾಧ ಮಾದರಿ:** ಮೆಟ್ರೋ ಮತ್ತು ಬಸ್ ನಿಲ್ದಾಣಗಳ ಬಳಿ ದ್ವಿಚಕ್ರ ವಾಹನ ಸರಗಳ್ಳತನ ಹಾಗೂ ವಾಹನ ಕಳ್ಳತನ.\n• **ಹೆಚ್ಚಳದ ಮಟ್ಟ:** ರಾಜ್ಯದ ಸರಾಸರಿಗಿಂತ 2.4 ಪಟ್ಟು ಹೆಚ್ಚಳ ⚠️",
+  },
+
+  fact_highest_murder: {
+    ...MOCK_RESPONSES.fact_highest_murder,
+    answer:
+      "ಕಲಬುರಗಿ (Kalaburagi) ಜಿಲ್ಲೆಯಲ್ಲಿ 2024-2025 ರ ಅವಧಿಯಲ್ಲಿ ಅತಿ ಹೆಚ್ಚು ಕೊಲೆ ಪ್ರಕರಣಗಳು (2 ಪ್ರಕರಣಗಳು) ದಾಖಲಾಗಿವೆ, ಆದರೆ ಸೆಪ್ಟೆಂಬರ್ 2024 ರಲ್ಲಿ 5 ಪ್ರಕರಣಗಳ ಗಂಭೀರ ಹೆಚ್ಚಳ (9.9 ಸಿಗ್ಮಾ) ದಾಖಲಾಗಿದೆ. ⚠️",
+  },
+
+  fact_highest_cyber: {
+    ...MOCK_RESPONSES.fact_highest_cyber,
+    answer:
+      "ಬೆಂಗಳೂರು ನಗರ (Bengaluru Urban) ಜಿಲ್ಲೆಯಲ್ಲಿ 2024-2025 ರ ಅವಧಿಯಲ್ಲಿ ಅತಿ ಹೆಚ್ಚು ಸೈಬರ್ ಅಪರಾಧ ಪ್ರಕರಣಗಳು (8 ಪ್ರಕರಣಗಳು) ದಾಖಲಾಗಿವೆ. ಈ ಪ್ರವೃತ್ತಿಯು ಹೆಚ್ಚುತ್ತಿದೆ. ⚠️",
   },
 
   narrative_mo_pattern: {

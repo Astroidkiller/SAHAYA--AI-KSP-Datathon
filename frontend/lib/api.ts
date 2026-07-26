@@ -52,6 +52,21 @@ export async function sendChatMessage(
     return responses.network_crime_ring;
   }
 
+  // Specific crime categories first (so queries like 'most murders' don't hit the generic theft check)
+  if (
+    lower.includes("murder") || lower.includes("killing") || lower.includes("homicide") ||
+    lower.includes("ಕೊಲೆ") || lower.includes("ಕೊಲೆಗಳು")
+  ) {
+    return responses.fact_highest_murder;
+  }
+
+  if (
+    lower.includes("cyber") || lower.includes("online") || lower.includes("phishing") ||
+    lower.includes("hack") || lower.includes("fraud") || lower.includes("ಸೈಬರ್")
+  ) {
+    return responses.fact_highest_cyber;
+  }
+
   // Fact / stats intent
   if (
     lower.includes("highest") || lower.includes("most") || lower.includes("how many") ||
