@@ -1,5 +1,5 @@
-import { ChatWindow } from "@/components/ChatWindow";
+import { ClientRouter } from "@/components/ClientRouter";
 
 export default function Home() {
-  return <ChatWindow />;
+  return <ClientRouter />;
 }
