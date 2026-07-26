@@ -1,24 +1,58 @@
 1:"$Sreact.fragment"
-2:I[11414,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"Providers"]
-3:I[87771,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"Sidebar"]
-4:I[39756,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"default"]
-5:I[37457,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"default"]
-6:I[47257,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"ClientPageRoot"]
-7:I[32815,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/3nsxno4shucpw.js","/_next/static/chunks/2xq2b1e8rlgxj.js"],"default"]
-a:I[97367,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
-b:"$Sreact.suspense"
-e:I[97367,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"ViewportBoundary"]
-10:I[97367,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"MetadataBoundary"]
-12:I[68027,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"default",1]
+3:I[11414,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"Providers"]
+4:I[87771,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"Sidebar"]
+5:I[39756,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"default"]
+6:I[37457,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"default"]
+7:I[47257,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"ClientPageRoot"]
+8:I[32815,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/3nsxno4shucpw.js","/_next/static/chunks/2xq2b1e8rlgxj.js"],"default"]
+10:I[68027,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"default",1]
 :HL["/_next/static/chunks/1wxrxg5j69ysx.css","style"]
 :HL["/_next/static/media/70bc3e132a0a741e-s.p.3t6q91iet4nsy.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-0:{"P":null,"c":["","network",""],"q":"","i":false,"f":[[["",{"children":["network",{"children":["__PAGE__",{}]}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/1wxrxg5j69ysx.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/_next/static/chunks/06waugcye9c7i.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/_next/static/chunks/14mrh2-p_w84d.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","className":"inter_a594d4de-module__Mkkauq__variable jetbrains_mono_6f744923-module__ezYzYG__variable h-full antialiased","children":["$","body",null,{"className":"min-h-full flex bg-[var(--color-bg-primary)]","children":["$","$L2",null,{"children":[["$","$L3",null,{}],["$","main",null,{"className":"flex-1 ml-64 min-h-screen","children":["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]]}]}]}]]}],{"children":[["$","$1","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["$","$1","c",{"children":[["$","$L6",null,{"Component":"$7","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@8","$@9"]}}],[["$","script","script-0",{"src":"/_next/static/chunks/3nsxno4shucpw.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/_next/static/chunks/2xq2b1e8rlgxj.js","async":true,"nonce":"$undefined"}]],["$","$La",null,{"children":["$","$b",null,{"name":"Next.MetadataOutlet","children":"$@c"}]}]]}],{},null,false,null]},null,false,"$@d"]},null,false,null],["$","$1","h",{"children":[null,["$","$Le",null,{"children":"$Lf"}],["$","div",null,{"hidden":true,"children":["$","$L10",null,{"children":["$","$b",null,{"name":"Next.Metadata","children":"$L11"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],false]],"m":"$undefined","G":["$12",[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/1wxrxg5j69ysx.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"2ddqewbIuH6F7seiy3WKQ"}
-13:[]
-d:"$W13"
-8:{}
-9:"$0:f:0:1:1:children:1:children:0:props:children:0:props:serverProvidedParams:params"
-f:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
-14:I[27201,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"IconMark"]
-c:null
-11:[["$","title","0",{"children":"SAHAYA AI — KSP Crime Intelligence Platform"}],["$","meta","1",{"name":"description","content":"Conversational crime analytics assistant for Karnataka State Police. Suspect network analysis, hotspot detection, and multilingual voice input powered by Zoho Catalyst."}],["$","meta","2",{"name":"keywords","content":"KSP,crime intelligence,SAHAYA,Karnataka Police,analytics"}],["$","link","3",{"rel":"icon","href":"/favicon.ico?favicon.2vob68tjqpejf.ico","sizes":"256x256","type":"image/x-icon"}],["$","$L14","4",{}]]
+2:T514,
+              (function() {
+                try {
+                  // 1. Unregister all old Service Workers
+                  if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                      for (var i = 0; i < registrations.length; i++) {
+                        registrations[i].unregister();
+                      }
+                    });
+                  }
+                  // 2. Clear CacheStorage
+                  if ('caches' in window) {
+                    caches.keys().then(function(names) {
+                      for (var i = 0; i < names.length; i++) {
+                        caches.delete(names[i]);
+                      }
+                    });
+                  }
+                  // 3. One-time version check to purge stale localStorage in normal Chrome
+                  var CURRENT_VERSION = 'v2.5.0_clean';
+                  var savedVer = localStorage.getItem('sahaya_build_ver');
+                  if (savedVer !== CURRENT_VERSION) {
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    localStorage.setItem('sahaya_build_ver', CURRENT_VERSION);
+                  }
+                } catch(e) {}
+              })();
+            0:{"P":null,"c":["","network",""],"q":"","i":false,"f":[[["",{"children":["network",{"children":["__PAGE__",{}]}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/1wxrxg5j69ysx.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/_next/static/chunks/06waugcye9c7i.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/_next/static/chunks/14mrh2-p_w84d.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","className":"inter_a594d4de-module__Mkkauq__variable jetbrains_mono_6f744923-module__ezYzYG__variable h-full antialiased","children":[["$","head",null,{"children":[["$","meta",null,{"httpEquiv":"Cache-Control","content":"no-cache, no-store, must-revalidate"}],["$","meta",null,{"httpEquiv":"Pragma","content":"no-cache"}],["$","meta",null,{"httpEquiv":"Expires","content":"0"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}]]}],["$","body",null,{"className":"min-h-full flex bg-[var(--color-bg-primary)]","children":["$","$L3",null,{"children":[["$","$L4",null,{}],["$","main",null,{"className":"flex-1 ml-64 min-h-screen","children":["$","$L5",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]]}]}]]}]]}],{"children":[["$","$1","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L6",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["$","$1","c",{"children":[["$","$L7",null,{"Component":"$8","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@9","$@a"]}}],["$Lb","$Lc"],"$Ld"]}],{},null,false,null]},null,false,"$@e"]},null,false,null],"$Lf",false]],"m":"$undefined","G":["$10",["$L11"]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"aJhI6GfNc4yrbK8Ez_g7s"}
+12:I[97367,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+13:"$Sreact.suspense"
+16:I[97367,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"ViewportBoundary"]
+18:I[97367,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"MetadataBoundary"]
+b:["$","script","script-0",{"src":"/_next/static/chunks/3nsxno4shucpw.js","async":true,"nonce":"$undefined"}]
+c:["$","script","script-1",{"src":"/_next/static/chunks/2xq2b1e8rlgxj.js","async":true,"nonce":"$undefined"}]
+d:["$","$L12",null,{"children":["$","$13",null,{"name":"Next.MetadataOutlet","children":"$@14"}]}]
+15:[]
+e:"$W15"
+f:["$","$1","h",{"children":[null,["$","$L16",null,{"children":"$L17"}],["$","div",null,{"hidden":true,"children":["$","$L18",null,{"children":["$","$13",null,{"name":"Next.Metadata","children":"$L19"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}]
+11:["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/1wxrxg5j69ysx.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]
+9:{}
+a:"$0:f:0:1:1:children:1:children:0:props:children:0:props:serverProvidedParams:params"
+17:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+1a:I[27201,["/_next/static/chunks/06waugcye9c7i.js","/_next/static/chunks/14mrh2-p_w84d.js"],"IconMark"]
+14:null
+19:[["$","title","0",{"children":"SAHAYA AI — KSP Crime Intelligence Platform"}],["$","meta","1",{"name":"description","content":"Conversational crime analytics assistant for Karnataka State Police. Suspect network analysis, hotspot detection, and multilingual voice input powered by Zoho Catalyst."}],["$","meta","2",{"name":"keywords","content":"KSP,crime intelligence,SAHAYA,Karnataka Police,analytics"}],["$","link","3",{"rel":"icon","href":"/favicon.ico?favicon.2vob68tjqpejf.ico","sizes":"256x256","type":"image/x-icon"}],["$","$L1a","4",{}]]

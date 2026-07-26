@@ -33,6 +33,45 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
+      <head>
+        <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta httpEquiv="Pragma" content="no-cache" />
+        <meta httpEquiv="Expires" content="0" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  // 1. Unregister all old Service Workers
+                  if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                      for (var i = 0; i < registrations.length; i++) {
+                        registrations[i].unregister();
+                      }
+                    });
+                  }
+                  // 2. Clear CacheStorage
+                  if ('caches' in window) {
+                    caches.keys().then(function(names) {
+                      for (var i = 0; i < names.length; i++) {
+                        caches.delete(names[i]);
+                      }
+                    });
+                  }
+                  // 3. One-time version check to purge stale localStorage in normal Chrome
+                  var CURRENT_VERSION = 'v2.5.0_clean';
+                  var savedVer = localStorage.getItem('sahaya_build_ver');
+                  if (savedVer !== CURRENT_VERSION) {
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    localStorage.setItem('sahaya_build_ver', CURRENT_VERSION);
+                  }
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-full flex bg-[var(--color-bg-primary)]">
         <Providers>
           <Sidebar />
@@ -42,3 +81,4 @@ export default function RootLayout({
     </html>
   );
 }
+
