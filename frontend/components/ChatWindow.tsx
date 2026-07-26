@@ -219,22 +219,41 @@ export function ChatWindow() {
       .substring(0, 500);
 
     const doSpeak = () => {
-      const utterance = new SpeechSynthesisUtterance(cleanText);
       const voices = window.speechSynthesis.getVoices();
-      let selectedVoice: SpeechSynthesisVoice | null = null;
-
       const maleNames = ["ravi", "david", "mark", "george", "guy", "james", "richard", "alex", "stefan", "pavel", "sean", "michael", "daniel", "brian", "chris", "male"];
 
-      if (language === "kn") {
-        // Kannada Mode: Search for Kannada female voice first (Google Kannada / Zia Regional TTS)
+      const isKannada = language === "kn" || /[\u0C80-\u0CFF]/.test(text);
+      let selectedVoice: SpeechSynthesisVoice | null = null;
+      let textToSpeak = cleanText;
+
+      if (isKannada) {
+        // Search for native Kannada voice (Google Kannada, kn-IN, Zia Regional TTS)
         selectedVoice = voices.find(v => 
-          (v.lang.includes("kn") || v.name.toLowerCase().includes("kannada") || v.name.toLowerCase().includes("ಕನ್ನಡ")) &&
-          !maleNames.some(m => v.name.toLowerCase().includes(m))
-        ) || voices.find(v => v.lang.includes("kn") || v.name.toLowerCase().includes("kannada")) || null;
+          v.lang.toLowerCase().includes("kn") || 
+          v.name.toLowerCase().includes("kannada") || 
+          v.name.toLowerCase().includes("ಕನ್ನಡ")
+        ) || null;
+
+        // If system lacks native Kannada voice font, speak English summary to prevent gibberish
+        if (!selectedVoice) {
+          textToSpeak = text
+            .replace(/ಬೆಂಗಳೂರು ನಗರ/g, "Bengaluru Urban")
+            .replace(/ಕಳ್ಳತನ/g, "theft")
+            .replace(/ಪ್ರಕರಣಗಳು/g, "cases")
+            .replace(/ಆರೋಪಿ/g, "suspect")
+            .replace(/ಅಪರಾಧ/g, "crime")
+            .replace(/ಎಫ್‌ಐಆರ್/g, "FIR")
+            .replace(/[\u0C80-\u0CFF]+/g, "")
+            .replace(/\s+/g, " ")
+            .trim();
+          
+          if (!textToSpeak || textToSpeak.length < 5) {
+            textToSpeak = "Karnataka Police Intelligence Report summary generated for active case file.";
+          }
+        }
       }
 
       if (!selectedVoice) {
-        // English Mode: Prioritize premium natural female voices (Zira, Heera, Neerja, Aria, Jenny, Samantha, Google Female)
         const femalePriority = [
           "zira", "heera", "neerja", "aria", "jenny", "samantha",
           "google us english female", "google uk english female", "google us english",
@@ -250,7 +269,6 @@ export function ChatWindow() {
           }
         }
 
-        // Fallback: exclude explicit male names
         if (!selectedVoice && voices.length > 0) {
           selectedVoice = voices.find(v => 
             !maleNames.some(m => v.name.toLowerCase().includes(m))
@@ -258,15 +276,17 @@ export function ChatWindow() {
         }
       }
 
+      const utterance = new SpeechSynthesisUtterance(textToSpeak);
+
       if (selectedVoice) {
         utterance.voice = selectedVoice;
         utterance.lang = selectedVoice.lang;
       } else {
-        utterance.lang = language === "kn" ? "kn-IN" : "en-US";
+        utterance.lang = isKannada ? "kn-IN" : "en-US";
       }
 
-      utterance.rate = 1.1;
-      utterance.pitch = 1.4; // High natural female vocal pitch
+      utterance.rate = isKannada ? 0.9 : 1.1; // Unhurried 0.9x rate for Kannada, 1.1x for English
+      utterance.pitch = isKannada ? 1.05 : 1.35; // Natural pitch
 
       utterance.onend = () => setSpeakingMessageId(null);
       utterance.onerror = () => setSpeakingMessageId(null);
