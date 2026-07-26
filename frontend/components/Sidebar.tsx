@@ -35,9 +35,9 @@ export function Sidebar() {
 
   const NAV_ITEMS = [
     { href: "/", label: t.navChat, icon: MessageSquare, id: "nav-chat" },
-    { href: "/dashboard/index.html", label: t.navDashboard, icon: LayoutDashboard, id: "nav-dashboard" },
-    { href: "/network/index.html", label: t.navNetwork, icon: Network, id: "nav-network" },
-    { href: "/reports/index.html", label: t.navReports, icon: FileText, id: "nav-reports" },
+    { href: "/dashboard/", label: t.navDashboard, icon: LayoutDashboard, id: "nav-dashboard" },
+    { href: "/network/", label: t.navNetwork, icon: Network, id: "nav-network" },
+    { href: "/reports/", label: t.navReports, icon: FileText, id: "nav-reports" },
   ];
 
   const handleSaveSettings = () => {
