@@ -3,8 +3,14 @@
 import { useState, useEffect, useCallback } from "react";
 import { MOCK_HOTSPOTS } from "./mock-data";
 
-// ── Embedded static graph data (no network fetch needed) ──
-const STATIC_GRAPH_DATA = {
+import firRecords from "@/public/data/fir_records.json";
+import karnatakaDistricts from "@/public/data/karnataka_districts.json";
+import anomalyAlerts from "@/public/data/anomaly_alerts.json";
+import forecastAnswers from "@/public/data/forecast_answers.json";
+import graphDataJson from "@/public/data/graph_data.json";
+
+// ── Embedded static graph data fallback ──
+const STATIC_GRAPH_DATA = graphDataJson || {
   nodes: [
     { id: "S001", name: "Ravi Kumar",    risk: "High"   as const, district: "Bengaluru Urban", group: 1 },
     { id: "S002", name: "Suresh Reddy",  risk: "Medium" as const, district: "Bengaluru Urban", group: 1 },
@@ -28,7 +34,7 @@ const STATIC_GRAPH_DATA = {
 };
 
 /**
- * Fully offline data hook — returns embedded static data instantly.
+ * Fully offline data hook — returns embedded static data instantly for all datasets.
  * No network fetches are made. Works 100% reliably on Zoho Catalyst / Slate.
  */
 export function usePublicData<T>(
@@ -44,6 +50,14 @@ export function usePublicData<T>(
       setData(MOCK_HOTSPOTS as unknown as T);
     } else if (filename === "graph_data.json") {
       setData(STATIC_GRAPH_DATA as unknown as T);
+    } else if (filename === "fir_records.json") {
+      setData(firRecords as unknown as T);
+    } else if (filename === "karnataka_districts.json") {
+      setData(karnatakaDistricts as unknown as T);
+    } else if (filename === "anomaly_alerts.json") {
+      setData(anomalyAlerts as unknown as T);
+    } else if (filename === "forecast_answers.json") {
+      setData(forecastAnswers as unknown as T);
     } else {
       setData(fallback);
     }
@@ -56,3 +70,4 @@ export function usePublicData<T>(
 
   return { data, loading, mutate: loadData, refetch: loadData };
 }
+

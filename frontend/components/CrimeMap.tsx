@@ -2,8 +2,10 @@
 
 import { useCallback, useEffect, useState, useRef } from "react";
 import { useLanguage } from "@/lib/language-context";
+import { usePublicData } from "@/lib/use-public-data";
 import { formatDistrict } from "@/lib/translations";
 import type { Map as LeafletMap } from "leaflet";
+
 
 /**
  * Official Tactical Crime Map for Karnataka State Police.
@@ -55,23 +57,8 @@ export function CrimeMap() {
   const mapRef = useRef<HTMLDivElement>(null);
   const leafletRef = useRef<LeafletMap | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [firData, setFirData] = useState<FIRRecord[]>([]);
+  const { data: firData } = usePublicData<FIRRecord[]>("fir_records.json", []);
 
-  const loadData = useCallback(async () => {
-    try {
-      const res = await fetch("/data/fir_records.json");
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data: FIRRecord[] = await res.json();
-      setFirData(data);
-    } catch (err) {
-      console.warn("[CrimeMap] Failed to load FIR records:", err);
-      setFirData([]);
-    }
-  }, []);
-
-  useEffect(() => {
-    loadData();
-  }, [loadData]);
 
   // Init Leaflet GIS Layer
   const initLeafletMap = useCallback(async () => {
