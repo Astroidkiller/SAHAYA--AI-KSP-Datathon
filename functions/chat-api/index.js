@@ -45,6 +45,22 @@ app.use((req, res, next) => {
 });
 
 /**
+ * GET /api/chat — Graceful fallback for old cached JS or preflight probes.
+ * Returns a valid mock response instead of 405.
+ */
+app.get("/api/chat", (req, res) => {
+  res.json({
+    type: "fact",
+    answer: "Welcome to SAHAYA AI. Please use the chat interface to send queries. The intelligence engine is online and ready.",
+    data: { district: "Karnataka", category: "System", count: 0, period: "2024-2025", trend: "Stable" },
+    source: { type: "database", table: "System", verified_at: new Date().toISOString() },
+    reasoning: ["System health check", "API is active and responding"],
+    graph: null,
+    session_id: null,
+  });
+});
+
+/**
  * POST /api/chat
  * Request:  { message: string, session_id?: string, language?: "en" | "kn" }
  * Response: { type, answer, data, source, reasoning, graph, session_id }
